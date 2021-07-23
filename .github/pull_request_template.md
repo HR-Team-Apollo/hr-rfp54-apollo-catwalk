@@ -8,6 +8,8 @@
 ##### Was this sent back to resolve any issues?
 > _Please provide why it was sent back to resolve any issues initially and what was resolved_
 
+Your_comments_here
+
 ###### [Trello Ticket Link](INSERT_URL_HERE)
 > _Please include the relevant Trello Ticket_
 
