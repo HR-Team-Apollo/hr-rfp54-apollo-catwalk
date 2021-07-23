@@ -2,9 +2,13 @@
 
 ## Environment Setup: 
 * Install all package dependencies. 
-  ```npm install```
+  ```
+  npm install
+  ```
 * Start server via Vite @localhost:3000
-  ```npm run dev```
+  ```
+  npm run dev
+  ```
 
 ## Contributors:
 * Caleb Broderick - Related Items & Comparisons
