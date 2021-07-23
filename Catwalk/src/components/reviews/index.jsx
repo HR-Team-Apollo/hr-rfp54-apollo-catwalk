@@ -1,7 +1,7 @@
 import React from 'react';
 
 const Reviews = () => (
-  <div>This is Reviews</div>
+  <div>Amalia was here</div>
 );
 
 export default Reviews;
