@@ -1,14 +1,14 @@
-# Welcome to Project-Catwalk!
+# Welcome to Project Catwalk!
 
-## Environemnt Setup: 
+## Environment Setup: 
 - Run npm install
 - Run npm run dev (will also start up server via Vite @localhost:3000)
 
 ## Contributors:
-Caleb Broderick - Related Items & Comparisons
+* Caleb Broderick - Related Items & Comparisons
 
-Katie Kim - Overview
+* Katie Kim - Overview
 
-Amalia Bryant - Ratings & Reviews
+* Amalia Bryant - Ratings & Reviews
 
-Yasin Khan - Q & A
+* Yasin Khan - Q & A
