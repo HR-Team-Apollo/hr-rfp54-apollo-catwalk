@@ -1,6 +1,4 @@
 import React from 'react';
-import questionsList from './dummyQuestions';
-import answersList from './dummyAnswers';
 import Questions from './Questions';
 import Answers from './Answers';
 import SearchBar from './SearchBar';
