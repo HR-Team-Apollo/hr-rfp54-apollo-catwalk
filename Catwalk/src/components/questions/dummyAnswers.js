@@ -8,7 +8,8 @@ const answersList = [
     user: 'User231',
     photos: [],
     helpfulCount: 43,
-    date: 'May 1, 2019'
+    date: 'May 1, 2019',
+    isSeller: true
   },
   {
     productId: 101,
@@ -18,7 +19,8 @@ const answersList = [
     user: 'User432',
     photos: [],
     helpfulCount: 42,
-    date: 'May 1, 2019'
+    date: 'May 1, 2019',
+    isSeller: false
   },
   {
     productId: 102,
@@ -28,7 +30,8 @@ const answersList = [
     user: 'User942',
     photos: [],
     helpfulCount: 21,
-    date: 'May 1, 2019'
+    date: 'May 1, 2019',
+    isSeller: false
   },
   {
     productId: 103,
@@ -38,7 +41,8 @@ const answersList = [
     user: 'User4329',
     photos: [],
     helpfulCount: 23,
-    date: 'May 1, 2019'
+    date: 'May 1, 2019',
+    isSeller: false
   },
   {
     productId: 104,
@@ -48,7 +52,8 @@ const answersList = [
     user: 'User345',
     photos: [],
     helpfulCount: 12,
-    date: 'May 1, 2019'
+    date: 'May 1, 2019',
+    isSeller: false
   },
   {
     productId: 105,
@@ -58,7 +63,8 @@ const answersList = [
     user: 'User2131',
     photos: [],
     helpfulCount: 78,
-    date: 'May 1, 2019'
+    date: 'May 1, 2019',
+    isSeller: false
   }
 ];
 
