@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1627080602715" clover="3.2.0">
-  <project timestamp="1627080602715" name="All files">
+<coverage generated="1627103258907" clover="3.2.0">
+  <project timestamp="1627103258907" name="All files">
     <metrics statements="5" coveredstatements="4" conditionals="0" coveredconditionals="0" methods="2" coveredmethods="1" elements="7" coveredelements="5" complexity="0" loc="5" ncloc="5" packages="1" files="1" classes="1"/>
-    <file name="testing.js" path="/home/calebbroderick/hackreactor/rfp54/group-projects/hr-rfp54-apollo-catwalk/Catwalk/src/components/related/testing.js">
+    <file name="testing.js" path="/Users/amaliabryant/Documents/HackReactor/FEM/hr-rfp54-apollo-catwalk/Catwalk/src/components/related/testing.js">
       <metrics statements="5" coveredstatements="4" conditionals="0" coveredconditionals="0" methods="2" coveredmethods="1"/>
       <line num="1" count="1" type="stmt"/>
       <line num="2" count="1" type="stmt"/>
