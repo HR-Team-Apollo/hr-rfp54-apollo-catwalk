@@ -1,11 +1,10 @@
 import React from 'react';
+import Stars from '../../../../utils/stars';
 
 const Review = () => (
   <div className='review' style={{display: 'block'}}>
     <div className='review-header' style={{display: 'flex', justifyContent: 'space-between'}}>
-      <div className='rating'>
-        ⭐️⭐️⭐️⭐️⭐️
-      </div>
+      <Stars rating='3'/>
       <div>
         <span className='reviewer_name'>shortandsweeet</span>
         <span className='date'>2019-04-14T00:00:00.000Z</span>
