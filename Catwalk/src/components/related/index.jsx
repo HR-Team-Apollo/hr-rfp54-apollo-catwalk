@@ -5,9 +5,9 @@ import testData from './testData.js';
 const Related = () => (
   <div>
     <h2>Related Products</h2>
-    <ProductList testData = {testData}/>
+    <ProductList isStar = {true} testData = {testData}/>
     <h2>Your Outfit</h2>
-    <ProductList testData = {testData}/>
+    <ProductList isStar = {false} testData = {testData}/>
   </div>
 );
 
