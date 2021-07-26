@@ -2,7 +2,7 @@ import React from 'react';
 
 const Stars = () => (
   <span style={{
-    outline: '1px solid red'
+    WebkitTextStroke: '1px blue'
   }}>
     ⭐️⭐️⭐️⭐️⭐️
   </span>
