@@ -15,8 +15,8 @@ const QuestionsAndAnswers = () => (
   <div>
     <h2>Question & Answers</h2>
   
-    {mappedQuestions}
-    {mappedAnswers}
+    <Questions />
+    <Answers />
     <div className="searchBar">
       <SearchBar />
     </div>

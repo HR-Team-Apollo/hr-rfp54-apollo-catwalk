@@ -1,16 +1,16 @@
 import React from 'react';
 import questionsList from './dummyQuestions';
-import Question from "./Question";
+import Question from './Question';
 
 const mappedQuestions = questionsList.map(questionObj => 
-    <Question
+  <Question
     key={questionObj.questionId}
-    body={questionObj.body}
-    />
+    questionObj={questionObj}
+  />);
 
 const Questions = () => (
   <div>
-      {mappedQuestions}
+    {mappedQuestions}
   </div>
 );
 

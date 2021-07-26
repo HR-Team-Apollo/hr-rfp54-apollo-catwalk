@@ -3,7 +3,7 @@ import questionsList from "./dummyQuestions";
 
 const Question = ({questionObj}) => (
   <div>
-    <h4>Q: {questionObj.body}</h4>;
+    <h4>Q: {questionObj.body}</h4>
   </div>
     
 );
