@@ -1,5 +1,4 @@
 import React from 'react';
-import questionsList from "./dummyQuestions";
 
 const Question = ({questionObj}) => (
   <div>
