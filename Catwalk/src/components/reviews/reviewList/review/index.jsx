@@ -13,9 +13,9 @@ const Review = () => (
     </div>
 
     <div className='review-body'>
-      <div>I'm enjoying wearing these shades</div>
-      <div>Comfortable and practical.</div>
-      <div>Glad you're enjoying the product!</div>
+      <div className='summary'>I'm enjoying wearing these shades</div>
+      <div className='body'>Comfortable and practical.</div>
+      <div className='response'>Glad you're enjoying the product!</div>
     </div>
 
     <div className='review-footer'>

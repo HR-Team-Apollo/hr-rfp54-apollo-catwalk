@@ -1,7 +1,7 @@
 import React from 'react';
 import mockData from './reviewData.js';
 
-import Ratings from './Ratings';
+import Ratings from './ratings';
 import ReviewList from './reviewList';
 
 const Reviews = () => (
