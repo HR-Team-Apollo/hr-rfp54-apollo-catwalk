@@ -4,7 +4,6 @@ import ProductBreakdown from './productBreakdown';
 
 const Ratings = () => (
   <div className="ratings">
-    <p>Ratings</p>
     <RatingBreakdown/>
     <ProductBreakdown/>
   </div>
