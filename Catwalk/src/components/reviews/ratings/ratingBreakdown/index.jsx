@@ -1,5 +1,5 @@
 import React from 'react';
-import Stars from '../../stars';
+import Stars from '../../../../utils/stars';
 import StarBar from './starBar';
 
 const RatingBreakdown = () => (

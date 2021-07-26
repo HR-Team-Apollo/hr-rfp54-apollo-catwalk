@@ -15,7 +15,8 @@ const Stars = ({rating}) => (
       WebkitBackgroundClip: 'text',
       backgroundImage: `linear-gradient(to right, #696969 ${(rating/5 * 100)}%, #ffffff00 50%)`,
       WebkitTextFillColor: 'transparent',
-    }}><i className='fa fa-car'></i>
+    }}>
+      {/* TODO: incorporate fontAwesome stars <i className='fa fa-star'></i> */}
       ⭐️⭐️⭐️⭐️⭐️
     </span>
     <span style={{

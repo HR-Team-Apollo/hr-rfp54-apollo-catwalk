@@ -1,5 +1,5 @@
 import React from 'react';
-import Stars from '../../stars';
+import Stars from '../../../../utils/stars';
 
 const Review = () => (
   <div className='review' style={{display: 'block'}}>
