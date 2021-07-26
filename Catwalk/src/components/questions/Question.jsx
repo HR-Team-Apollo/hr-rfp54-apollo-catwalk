@@ -1,9 +1,9 @@
 import React from 'react';
 import questionsList from "./dummyQuestions";
 
-const Question = () => (
+const Question = ({questionObj}) => (
   <div>
-    
+    <h4>Q: {questionObj.body}</h4>;
   </div>
     
 );
