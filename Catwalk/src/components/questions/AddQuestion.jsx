@@ -55,7 +55,7 @@ class AddQuestion extends React.Component {
     return (
       <div>
         <ModalContext.Consumer>  
-          {(openModal) => <button onClick={()=>openModal(modalContent)}>Add A Question +</button>}           
+          {(openModal) => <button onClick={() => openModal(modalContent)}>Add A Question +</button>}           
         </ModalContext.Consumer>
       </div>
     );
