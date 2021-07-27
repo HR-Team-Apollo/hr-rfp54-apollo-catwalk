@@ -1,5 +1,6 @@
 import React from 'react';
 import Stars from '../../../../utils/stars';
+import moment from 'moment';
 
 const Review = () => (
   <div className='review' style={{display: 'block'}}>
@@ -7,7 +8,7 @@ const Review = () => (
       <Stars rating='3'/>
       <div>
         <span className='reviewer_name'>shortandsweeet</span>
-        <span className='date'>2019-04-14T00:00:00.000Z</span>
+        <span className='date'>{moment('2019-04-14T00:00:00.000Z').format('LL')}</span>
       </div>
     </div>
 
