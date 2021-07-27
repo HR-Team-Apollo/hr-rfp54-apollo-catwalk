@@ -1,9 +1,23 @@
-import {shallow} from 'enzyme';
-import Ratings from './Ratings';
+import React from 'react';
+import ReactDOM from 'react-dom';
+import {act} from 'react-dom/test-utils';
+import ReviewList from './index.jsx';
 
-describe('<Reviews />', ()=>{
-  it ('renders a <Ratings /> component', () => {
-    const wrapper = shallow(<Reviews />);
-    expect(wrapper.exists(Ratings));
+let container;
+
+beforeEach(()=> {
+  container = document.createElement('div');
+  document.body.appendChild(container);
+});
+
+afterEach(()=>{
+  document.body.removeChild(container);
+  container = null;
+});
+
+it('renders a review list', ()=>{
+  act(()=>{
+    ReactDOM.render(<ReviewList/>, container);
   });
+  expect(isElement(<ReviewList/>)).toBe(true);
 })
