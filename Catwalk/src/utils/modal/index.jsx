@@ -10,8 +10,8 @@ const Modal = ({modalContent, close}) => (
     zIndex: '998'
   }}>
     <div className='modal' style={{
-      height: '20rem',
-      width: '20rem',
+      height: '30rem',
+      width: '30rem',
       backgroundColor: '#fff',
       position: 'absolute',
       top: '50%',

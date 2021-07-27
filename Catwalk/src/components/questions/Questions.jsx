@@ -12,6 +12,7 @@ const Questions = () => (
   <div>
     {mappedQuestions}
   </div>
+  
 );
 
 export default Questions;

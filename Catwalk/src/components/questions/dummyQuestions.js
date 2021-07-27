@@ -27,7 +27,7 @@ const questionsList = [
     productId: 104,
     questionId: 14,
     helpfulCount: 38,
-    body: 'What color is it'
+    body: 'What color is it?'
   },
   {
     productId: 105,
