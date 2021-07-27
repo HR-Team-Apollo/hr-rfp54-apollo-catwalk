@@ -12,32 +12,27 @@ class AddQuestion extends React.Component {
         <h3>Ask Your Question</h3>
         <h4>About the [Product Name Here]</h4>
         <label>
-              Your Question*
+            Your Question*
+        </label>
+        <textarea
+          rows="6" 
+          cols="57"
+        >
+        </textarea>
+        <label>
+            What is your nickname*
         </label>
         <input 
           type="text"
-          placeholder="Your Question"
+          placeholder="Example: jack543!"
         />
         <label>
-              What is your nickname*
+            Your email*
         </label>
+  
         <input 
           type="text"
-          placeholder="Your Nickname"
-        />
-        <label>
-              Your email*
-        </label>
-        <input 
-          type="text"
-          placeholder="Your E-mail"
-        />
-        <label>
-              What is your nickname*
-        </label>
-        <input 
-          type="text"
-          placeholder="Your Nickname"
+          placeholder="Your Email"
         />
         <button>
             Submit Question
