@@ -2,16 +2,18 @@ import React from 'react';
 import Questions from './Questions';
 import Answers from './Answers';
 import SearchBar from './SearchBar';
+import AddQuestion from './AddQuestion';
+import MoreAnsweredQuestions from './MoreAnsweredQuestions';
 
 const QuestionsAndAnswers = () => (
   <div>
-    <h2>Question & Answers</h2>
+    <h2>Questions & Answers</h2>
   
     <Questions />
     <Answers />
-    <div className="searchBar">
-      <SearchBar />
-    </div>
+    <SearchBar />
+    <MoreAnsweredQuestions />
+    <AddQuestion />
   </div>
 );
 
