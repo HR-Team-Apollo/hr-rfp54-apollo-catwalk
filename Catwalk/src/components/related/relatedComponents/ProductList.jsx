@@ -1,12 +1,14 @@
 import React from 'react';
 import ProductCard from './ProductCard.jsx';
+import testData from '../testData.js';
 
-const ProductList = ({testData, isStar}) => (
+const ProductList = () => (
   <div style = {{display: 'flex', justifyContent: 'flex-start'}}>
-    <ProductCard isStar = {isStar} testCard = {testData[0]}/>
-    <ProductCard isStar = {isStar} testCard = {testData[0]}/>
-    <ProductCard isStar = {isStar} testCard = {testData[0]}/>
-    <ProductCard isStar = {isStar} testCard = {testData[0]}/>
+    {
+      testData.map((card, index) => {
+        return <ProductCard key = {index} isStar = {true} testCard = {card} />;
+      })
+    }
   </div>
 );
 
