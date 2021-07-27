@@ -1,13 +1,13 @@
 import React from 'react';
 import ProductList from './relatedComponents/ProductList.jsx';
-import testData from './testData.js';
+import YourOutfitList from './relatedComponents/YourOutfitList.jsx';
 
 const Related = () => (
   <div>
     <h2>Related Products</h2>
-    <ProductList testData = {testData}/>
+    <ProductList />
     <h2>Your Outfit</h2>
-    <ProductList testData = {testData}/>
+    <YourOutfitList />
   </div>
 );
 
