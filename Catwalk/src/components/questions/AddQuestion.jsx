@@ -8,18 +8,41 @@ class AddQuestion extends React.Component {
 
   render() {
     const modalContent = 
-      (<div>
+      (<form>
+        <h3>Ask Your Question</h3>
+        <h4>About the [Product Name Here]</h4>
         <label>
-              Enter the question
+              Your Question*
         </label>
         <input 
           type="text"
-          placeholder="stuff"
+          placeholder="Your Question"
+        />
+        <label>
+              What is your nickname*
+        </label>
+        <input 
+          type="text"
+          placeholder="Your Nickname"
+        />
+        <label>
+              Your email*
+        </label>
+        <input 
+          type="text"
+          placeholder="Your E-mail"
+        />
+        <label>
+              What is your nickname*
+        </label>
+        <input 
+          type="text"
+          placeholder="Your Nickname"
         />
         <button>
-            Add Question
+            Submit Question
         </button>
-      </div>
+      </form>
       );
     return (
       <div>
