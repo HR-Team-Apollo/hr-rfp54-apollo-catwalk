@@ -7,9 +7,8 @@ axios.defaults.headers.common['Authorization'] = API_KEY;
 
 module.exports = {
   getAllProducts: (req, res) => {
-    axios.get(`${apiUrl}/products`)
+    axios.get(`${apiUrl}/products`, {params: {count: req.query.count ? req.query.count : 5, page: req.query.page ? req.query.page : 1}})
       .then(resp => {
-        res.send(res);
         res.send(resp.data);
       })
       .catch(err => {
