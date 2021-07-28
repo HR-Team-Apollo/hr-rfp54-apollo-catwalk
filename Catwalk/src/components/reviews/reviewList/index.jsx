@@ -1,7 +1,7 @@
 import React from 'react';
 import Sorting from './sorting';
 import Review from './review';
-import ModalContext from '../../../modalContext.js';
+import AppContext from '../../../appContext.js';
 import ReviewForm from './reviewForm';
 
 const ReviewList = ({reviews}) => (
@@ -18,9 +18,9 @@ const ReviewList = ({reviews}) => (
     </ul>
     <div>
       <button>More Reviews</button>
-      <ModalContext.Consumer>
-        {(value) => <button onClick={()=>value(<ReviewForm/>)}>Add A Review +</button>}
-      </ModalContext.Consumer>
+      <AppContext.Consumer>
+        {(value) => <button onClick={()=>value.openModal(<ReviewForm/>)}>Add A Review +</button>}
+      </AppContext.Consumer>
 
     </div>
   </div>
