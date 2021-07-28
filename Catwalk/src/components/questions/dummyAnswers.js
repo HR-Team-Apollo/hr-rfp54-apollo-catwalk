@@ -1,6 +1,4 @@
 import questionsList from './dummyQuestions';
-// width  100%
-// height = 9em
 
 const answersList = [
   {
@@ -30,7 +28,7 @@ const answersList = [
       photoHelpfulCount: 93
     },
     helpfulCount: 42,
-    date: 'May 1, 2019',
+    date: 'April 4, 2013',
     isSeller: false
   },
   {
@@ -45,7 +43,7 @@ const answersList = [
       photoHelpfulCount: 93
     },
     helpfulCount: 21,
-    date: 'May 1, 2019',
+    date: 'June 3, 2015',
     isSeller: false
   },
   {
@@ -60,7 +58,7 @@ const answersList = [
       photoHelpfulCount: 93
     },
     helpfulCount: 23,
-    date: 'May 1, 2019',
+    date: 'July 15, 2020',
     isSeller: false
   },
   {
@@ -75,7 +73,7 @@ const answersList = [
       photoHelpfulCount: 93
     },
     helpfulCount: 12,
-    date: 'May 1, 2019',
+    date: 'March 4, 2000',
     isSeller: false
   },
   {
@@ -90,7 +88,7 @@ const answersList = [
       photoHelpfulCount: 93
     },
     helpfulCount: 78,
-    date: 'May 1, 2019',
+    date: 'June 6, 2021',
     isSeller: false
   }
 ];
