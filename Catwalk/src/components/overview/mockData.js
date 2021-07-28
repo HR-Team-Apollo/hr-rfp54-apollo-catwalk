@@ -11,7 +11,7 @@ export default {
         'quantity': 3,
         'images':[{
           'thumbnail': 'images/style_size_thumbnail_1.png',
-          'full_view': 'images/style_size_fullview_1.png'
+          'full_view': 'https://cdn.allbirds.com/image/fetch/q_auto,f_auto/w_1200,f_auto,q_auto,b_rgb:f5f5f5/https://cdn.shopify.com/s/files/1/1104/4168/products/Men_s_Wool_Runners_-_Natural_Grey__Light_Grey_Sole__-_imageAngle_77cba126-a7a5-4d2e-a899-59c6c1cd7b8a.png?v=1622651375'
         }]
       }, {
         'size': 'small',

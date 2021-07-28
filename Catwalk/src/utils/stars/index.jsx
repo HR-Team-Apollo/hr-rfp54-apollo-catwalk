@@ -11,7 +11,7 @@ const Stars = ({rating}) => (
       top: '0',
       left: '0',
       WebkitBackgroundClip: 'text',
-      backgroundImage: `linear-gradient(to right, #696969 ${(rating/5 * 100)}%, #ffffff00 50%)`,
+      backgroundImage: `linear-gradient(to right, #696969 ${(rating/5 * 100)}%, #ffffff00 ${(rating/5 * 100)}%)`,
       WebkitTextFillColor: 'transparent',
     }}>
       <i className='fa fa-star'></i>
