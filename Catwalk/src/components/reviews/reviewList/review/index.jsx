@@ -32,14 +32,19 @@ const Review = ({review}) => (
     <div className='review-footer'>
       Helpful?
       <span onClick={()=>{
-        console.log('if this has not been clicked before, increment helpfulness by one.')}}>
+        console.log('helpfulness++')}}>
         Yes
-      </span>
         ({review.helpfulness})
+      </span>
       <span onClick={()=>{
-        console.log('Report this review');
+        console.log('helpfulness--')}}>
+        No
+        ({review.helpfulness})
+      </span>
+      <span onClick={()=>{
+        console.log('Report!');
       }}>
-         | Report
+        Report
       </span>
     </div>
 
