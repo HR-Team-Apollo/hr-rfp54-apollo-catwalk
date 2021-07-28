@@ -1,19 +1,14 @@
 import React from 'react';
 import Stars from '../../../../utils/stars';
-// product_id	integer	Required ID of the product to post the review for
-// rating	int	Integer (1-5) indicating the review rating
-// summary	text	Summary text of the review
-// body	text	Continued or full text of the review
-// recommend	bool	Value indicating if the reviewer recommends the product
-// name	text	Username for question asker
-// email	text	Email address for question asker
-// photos	[text]	Array of text urls that link to images to be shown
-// characteristics	object	Object of keys representing characteristic_id and values representing the review value for that characteristic. { "14": 5, "15": 5 //...}
+import AppContent from '../../../../appContext.js';
+
 
 //props should have
 // product_id
 // product_name
 // characteristics
+const characteristics = ['size','width','comfort'];
+
 class ReviewForm extends React.Component {
   constructor(props){
     super(props);
@@ -26,9 +21,8 @@ class ReviewForm extends React.Component {
       email: null,
       photos: [],
       characteristics: {
-
       }
-    }
+    };
   }
   render(){
     return (
@@ -64,24 +58,41 @@ class ReviewForm extends React.Component {
           <input type="radio" id="recommend-n" name="recommend" value="false"></input>
           <label htmlFor='recommend'>No</label>
         </div>
-        <div>
-          {/* REQUIRED 5 radio buttons where 1 is lowest and 5 is highest see characteristics chart
-          By default, no button will be selected.
-          Above the five buttons, the meaning of the current selection will be explicitly presented.  The default will be “none selected”.  After making a selection, this should update as applicable for the given characteristic
+        {/* <div>
+          {
+            characteristics.map(char => (
+              <div className='characteristic' key={char}>
+                {
 
-          */}
-          <label htmlFor='recommend'>Characteristic </label>
-          <input type="radio" id="characteristics-5" name="characteristics" value="5"></input>
-          <label htmlFor='characteristics'>Great</label>
-          <input type="radio" id="characteristics-4" name="characteristics" value="4"></input>
-          <label htmlFor='characteristics'>Good</label>
-          <input type="radio" id="characteristics-3" name="characteristics" value="3"></input>
-          <label htmlFor='characteristics'>Average</label>
-          <input type="radio" id="characteristics-2" name="characteristics" value="2"></input>
-          <label htmlFor='characteristics'>Fair</label>
-          <input type="radio" id="characteristics-1" name="characteristics" value="1"></input>
-          <label htmlFor='characteristics'>Poor</label>
-        </div>
+                }
+              </div>
+            ))
+          }
+
+          for each characteristic of a product
+            create a set of radio inputs
+
+          <AppContent.Consumer>
+            {({characteristicsChart})=>(
+              {/* REQUIRED 5 radio buttons where 1 is lowest and 5 is highest see characteristics chart
+              By default, no button will be selected.
+              Above the five buttons, the meaning of the current selection will be explicitly presented.  The default will be “none selected”.  After making a selection, this should update as applicable for the given characteristic
+              */}
+              {/* // <label htmlFor='recommend'>Characteristic </label>
+              // <input type="radio" id="characteristics-5" name="characteristics" value="5"></input>
+              // <label htmlFor='characteristics'>Great</label>
+              // <input type="radio" id="characteristics-4" name="characteristics" value="4"></input>
+              // <label htmlFor='characteristics'>Good</label>
+              // <input type="radio" id="characteristics-3" name="characteristics" value="3"></input>
+              // <label htmlFor='characteristics'>Average</label>
+              // <input type="radio" id="characteristics-2" name="characteristics" value="2"></input>
+              // <label htmlFor='characteristics'>Fair</label>
+              // <input type="radio" id="characteristics-1" name="characteristics" value="1"></input>
+              // <label htmlFor='characteristics'>Poor</label>
+            )}
+          </AppContent.Consumer> */}
+        {/* </div>
+        */}
 
         <div className="form-example">
           <label htmlFor="summary">Summary: </label>
@@ -121,8 +132,18 @@ class ReviewForm extends React.Component {
           */}
           Submit</button>
       </form>
-    )
+    );
   }
 };
+//SUBMIT EVENT: POST THE FOLLOWING INFO TO API
+// product_id	integer	Required ID of the product to post the review for
+// rating	int	Integer (1-5) indicating the review rating
+// summary	text	Summary text of the review
+// body	text	Continued or full text of the review
+// recommend	bool	Value indicating if the reviewer recommends the product
+// name	text	Username for question asker
+// email	text	Email address for question asker
+// photos	[text]	Array of text urls that link to images to be shown
+// characteristics	object	Object of keys representing characteristic_id and values representing the review value for that characteristic. { "14": 5, "15": 5 //...}
 
 export default ReviewForm;
