@@ -5,7 +5,7 @@ export default {
   'results': [
     {
       'review_id': 5,
-      'rating': 3,
+      'rating': 1,
       'summary': 'I\'m enjoying wearing these shades',
       'recommend': false,
       'response': null,

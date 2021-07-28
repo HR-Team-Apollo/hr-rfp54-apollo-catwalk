@@ -10,13 +10,14 @@ const Modal = ({modalContent, close}) => (
     zIndex: '998'
   }}>
     <div className='modal' style={{
-      height: '30rem',
+      minHeight: '30rem',
       width: '30rem',
       backgroundColor: '#fff',
       position: 'absolute',
       top: '50%',
       left: '50%',
       transform: 'translate(-50%,-50%)',
+      padding: '2rem'
     }}>
       <div className='modal-header'>
         <button  onClick={close} style={{
