@@ -1,5 +1,5 @@
 import React from 'react';
-import ModalContext from '../../modalContext';
+import AppContext from '../../appContext';
 
 class AddQuestion extends React.Component {
   constructor(props) {
@@ -12,7 +12,7 @@ class AddQuestion extends React.Component {
   }
 
   render() {
-    const modalContent = 
+    const modalContent =
       (<form>
         <h3>Ask Your Question</h3>
         <h4>About the [Product Name Here]</h4>
@@ -21,7 +21,7 @@ class AddQuestion extends React.Component {
             Your Question*
         </label>
         <textarea
-          rows="6" 
+          rows="6"
           cols="57"
         >
         </textarea>
@@ -31,7 +31,7 @@ class AddQuestion extends React.Component {
           <br />
             For privacy reasons, do not use your full name or email address.
         </label>
-        <input 
+        <input
           type="text"
           placeholder="Example: jack543!"
         />
@@ -41,7 +41,7 @@ class AddQuestion extends React.Component {
             Your email*
         </label>
         <br />
-        <input 
+        <input
           type="text"
           placeholder="Your Email"
         />
@@ -54,9 +54,9 @@ class AddQuestion extends React.Component {
       );
     return (
       <div>
-        <ModalContext.Consumer>  
-          {(openModal) => <button onClick={() => openModal(modalContent)}>Add A Question +</button>}           
-        </ModalContext.Consumer>
+        <AppContext.Consumer>
+          {(openModal) => <button onClick={() => openModal(modalContent)}>Add A Question +</button>}
+        </AppContext.Consumer>
       </div>
     );
   }

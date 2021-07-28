@@ -2,6 +2,13 @@ body {
   margin: 0;
 }
 
+<<<<<<< HEAD
+#root {
+  max-width: 80rem;
+  margin: 0 auto;
+  font-family: arial;
+}
+=======
 
 /* OVERVIEW */
 #overview {
@@ -110,3 +117,4 @@ body {
 
 
 /* RATINGS */
+>>>>>>> main
