@@ -1,7 +1,7 @@
 import React from 'react';
 
 const Cart = () => (
-  <div>
+  <div id='cart'>
     <select className='size-selection'>
       <option value='Select Size'>Select Size</option>
     </select>

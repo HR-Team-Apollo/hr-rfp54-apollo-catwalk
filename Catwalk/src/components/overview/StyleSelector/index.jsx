@@ -1,7 +1,20 @@
 import React from 'react';
+import Style from './Style';
 
-const Cart = () => (
-  <div></div>
+const StyleSelector = () => (
+  <div id='style-selector'>
+    <h3>Style &gt; <span>Selected Style</span></h3>
+    <ul>
+      <Style />
+      <Style />
+      <Style />
+      <Style />
+      <Style />
+      <Style />
+      <Style />
+      <Style />
+    </ul>
+  </div>
 );
 
-export default Cart;
+export default StyleSelector;
