@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import ModalContext from '../../../modalContext.js';
+import AppContext from '../../../appContext.js';
 import CompareModal from './CompareModal.jsx';
 
 const ActionButton = ({isStar}) => {
@@ -8,14 +8,14 @@ const ActionButton = ({isStar}) => {
 
   if (isStar) {
     return (
-      <ModalContext.Consumer>
-        { value => (
-          <div onMouseEnter={() => setHover(true)} onMouseLeave ={() => setHover(false)} onClick = {() => value(<CompareModal />)} style = {{position: 'absolute', right: '0.5em', top: '0.5em', color: 'yellow', cursor: 'pointer'}}>
+      <AppContext.Consumer>
+        { context => (
+          <div onMouseEnter={() => setHover(true)} onMouseLeave ={() => setHover(false)} onClick = {() => context.openModal(<CompareModal />)} style = {{position: 'absolute', right: '0.5em', top: '0.5em', color: 'yellow', cursor: 'pointer'}}>
             <i className={isHover ? 'fa fa-star' : 'fa fa-star-o'}></i>
           </div>
         )
         }
-      </ModalContext.Consumer>
+      </AppContext.Consumer>
     );
   } else {
     return (
