@@ -10,5 +10,15 @@ router.get('/products/:product_id/styles', (req, res) => products.getProductStyl
 
 router.get('/products/:product_id/related', (req, res) => products.getProductsRelated(req, res, req.params.product_id));
 
+router.get('/reviews', reviews.getAllReviews);
+
+router.get('/reviews/meta/:product_id', reviews.getAllReviewsMeta);
+
+router.post('/reviews', reviews.postReview);
+
+router.put('/reviews/:review_id/helpful', reviews.markAsHelpful);
+
+router.put('/reviews/:review_id/report', reviews.reportReview);
+
 
 module.exports = router;
