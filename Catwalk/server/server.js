@@ -1,6 +1,7 @@
 const express = require('express');
 const app = express();
 const port = 3001;
+const router = require('./routes.js');
 
 app.use((req, res, next) => {
   res.append('Access-Control-Allow-Origin', ['*']);
@@ -9,10 +10,7 @@ app.use((req, res, next) => {
   next();
 });
 
-app.get('/api', (req, res) => {
-  res.send('Hello from server');
-  res.end();
-});
+app.use('/api', router);
 
 app.listen(port, () => {
   console.log(`Listening on port ${port}`);
