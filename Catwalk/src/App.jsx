@@ -13,9 +13,15 @@ class App extends React.Component {
       modal: {
         modalShown: false,
         modalContent: null
-      }
+      },
+      product: {
+        id: null,
+        name: null,
+        characteristics: {}
+      },
     };
   }
+
 
   closeModal() {
     this.setState({

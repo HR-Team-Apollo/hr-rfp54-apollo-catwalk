@@ -58,41 +58,23 @@ class ReviewForm extends React.Component {
           <input type="radio" id="recommend-n" name="recommend" value="false"></input>
           <label htmlFor='recommend'>No</label>
         </div>
-        {/* <div>
+        <div>
           {
             characteristics.map(char => (
               <div className='characteristic' key={char}>
                 {
+                  {/* REQUIRED 5 radio buttons where 1 is lowest and 5 is highest see characteristics chart
+                  By default, no button will be selected.
+                  Above the five buttons, the meaning of the current selection will be explicitly presented.  The default will be “none selected”.  After making a selection, this should update as applicable for the given characteristic
 
+                  <label htmlFor='recommend'>Characteristic </label>
+                  <input type="radio" id="characteristics-5" name="characteristics" value="5"></input>
+                  */}
                 }
               </div>
             ))
           }
-
-          for each characteristic of a product
-            create a set of radio inputs
-
-          <AppContent.Consumer>
-            {({characteristicsChart})=>(
-              {/* REQUIRED 5 radio buttons where 1 is lowest and 5 is highest see characteristics chart
-              By default, no button will be selected.
-              Above the five buttons, the meaning of the current selection will be explicitly presented.  The default will be “none selected”.  After making a selection, this should update as applicable for the given characteristic
-              */}
-              {/* // <label htmlFor='recommend'>Characteristic </label>
-              // <input type="radio" id="characteristics-5" name="characteristics" value="5"></input>
-              // <label htmlFor='characteristics'>Great</label>
-              // <input type="radio" id="characteristics-4" name="characteristics" value="4"></input>
-              // <label htmlFor='characteristics'>Good</label>
-              // <input type="radio" id="characteristics-3" name="characteristics" value="3"></input>
-              // <label htmlFor='characteristics'>Average</label>
-              // <input type="radio" id="characteristics-2" name="characteristics" value="2"></input>
-              // <label htmlFor='characteristics'>Fair</label>
-              // <input type="radio" id="characteristics-1" name="characteristics" value="1"></input>
-              // <label htmlFor='characteristics'>Poor</label>
-            )}
-          </AppContent.Consumer> */}
-        {/* </div>
-        */}
+        </div>
 
         <div className="form-example">
           <label htmlFor="summary">Summary: </label>
