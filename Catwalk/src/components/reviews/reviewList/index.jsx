@@ -17,7 +17,12 @@ const ReviewList = ({reviews}) => (
       }
     </ul>
     <div>
-      <button>More Reviews</button>
+      <button onClick={
+        ()=>{
+          // TODO: make an API call to get more reviews to render
+          alert('More reviews coming to a store near you!');
+        }
+      }>More Reviews</button>
       <AppContext.Consumer>
         {(value) => <button onClick={()=>value.openModal(<ReviewForm/>)}>Add A Review +</button>}
       </AppContext.Consumer>

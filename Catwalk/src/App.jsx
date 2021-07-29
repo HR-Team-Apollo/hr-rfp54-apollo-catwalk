@@ -15,10 +15,25 @@ class App extends React.Component {
         modalContent: null
       },
       product: {
+        //GET from intial product info API call onComponentMount
         id: null,
         name: null,
-        characteristics: {}
-      },
+        //GET from reviews/meta
+        characteristics: {
+          // "Size": {
+          //   "id": 14,
+          //   "value": "4.0000"
+          // },
+          // "Width": {
+          //   "id": 15,
+          //   "value": "3.5000"
+          // },
+          // "Comfort": {
+          //   "id": 16,
+          //   "value": "4.0000"
+          // }
+        }
+      }
     };
   }
 
@@ -44,12 +59,6 @@ class App extends React.Component {
   render() {
     return (
       <React.Fragment>
-        {
-          (this.state.modal.modalShown && this.state.modal.modalContent)?
-            <Modal modalContent={this.state.modal.modalContent} close={this.closeModal.bind(this)}/>:
-            null
-        }
-        <Overview />
         <AppContext.Provider value={{openModal: this.openModal.bind(this), characteristicsChart: {
           Size:[ 'A size too small', '½ a size too small', 'Perfect', '½ a size too big', 'A size too wide'],
           Width: [ 'Too narrow', 'Slightly narrow', 'Perfect', 'Slightly wide', 'Too wide'],
@@ -58,6 +67,12 @@ class App extends React.Component {
           Length: [ 'Runs Short', 'Runs slightly short', 'Perfect', 'Runs slightly long', 'Runs long'],
           Fit: [ 'Runs tight', 'Runs slightly tight', 'Perfect', 'Runs slightly long', 'Runs long']
         }}}>
+          {
+            (this.state.modal.modalShown && this.state.modal.modalContent)?
+              <Modal modalContent={this.state.modal.modalContent} close={this.closeModal.bind(this)}/>:
+              null
+          }
+          <Overview />
           <Related />
           <QuestionsAndAnswers />
           <Reviews />
