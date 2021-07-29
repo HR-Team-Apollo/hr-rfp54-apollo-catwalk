@@ -112,3 +112,33 @@
 * characteristics - object - Object of keys representing characteristic_id and values representing the review value for that characteristic. { "14": 5, "15": 5 //...}
 
 * Ex: '/reviews', assuming that the information passed into the request body has all keys shown above, this will post to the database, and return status OK
+
+--------------------------------------------------------------------------------------------------------------------------------
+
+* Mark review as Helpful
+* METHOD: PUT
+* URL: '/reviews/:review_id/helpful'
+* updates a review to show it was found helpful
+
+* Ex: '/reviews/246897/helpful', updates review 246897 to show that it was helpful
+
+--------------------------------------------------------------------------------------------------------------------------------
+
+* Report Review
+* METHOD: PUT
+* URL: '/reviews/:review_id/report'
+* updates a review to show it was reported
+
+* Ex: '/reviews/246897/reported', updates review 246897 to show that it was reported
+
+--------------------------------------------------------------------------------------------------------------------------------
+
+* Review and Characteristics
+* METHOD: GET
+* URL: '/reviews/chars'
+* Returns an object of both the reviews information and meta information, including characteristics
+
+* PARAMETER:
+* 'product_id' - integer - specify product_id to get meta and review info
+
+* Ex: '/reviews/chars?product_id=17067', Gets review info and meta info for product 17067

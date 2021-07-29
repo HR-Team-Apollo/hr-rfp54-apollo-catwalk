@@ -41,5 +41,42 @@ module.exports = {
       .catch(err => {
         res.send(err);
       });
+  },
+  getAllRelatedProducts: (req, res) => {
+    let prodId = req.params.product_id;
+    let tempObj = {};
+    axios.get(`${apiUrl}/products/${prodId}`)
+      .then(prod => {
+        tempObj.id = prod.data.id;
+        tempObj.name = prod.data.name;
+        tempObj.category = prod.data.category;
+        axios.get(`${apiUrl}/products/${prodId}/styles`)
+          .then(prodSt => {
+            tempObj.original_price = prodSt.data.results[0].original_price;
+            tempObj.sale_price = prodSt.data.results[0].sale_price;
+            tempObj.url = prodSt.data.results[0].photos[0].thumbnail_url;
+            axios.get(`${apiUrl}/reviews/meta/?product_id=${prodId}`)
+              .then(prodRe => {
+                let count = 0;
+                let avg = 0;
+                for (let rating in prodRe.data.ratings) {
+                  count += Number(prodRe.data.ratings[rating]);
+                  avg += Number(rating) * Number(prodRe.data.ratings[rating]);
+                }
+                tempObj.average_rating = avg / count;
+                tempObj.characteristics = prodRe.data.characteristics;
+                res.send(tempObj);
+              })
+              .catch(err => {
+                res.send(err);
+              });
+          })
+          .catch(err => {
+            res.send(err);
+          });
+      })
+      .catch(err => {
+        res.send(err);
+      });
   }
 };
