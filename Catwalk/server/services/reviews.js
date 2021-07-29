@@ -66,5 +66,22 @@ module.exports = {
         console.error(err);
         res.end();
       });
+  },
+  getReviewAndChars: (req, res) => {
+    axios.get(`${apiUrl}/reviews`, {params: {count: req.query.count ? req.query.count : 2, page: req.query.page ? req.query.page : 1, sort: req.query.sort ? req.query.sort : 'relevant', product_id: req.query.product_id ? req.query.product_id : '17067'}})
+      .then(resp => {
+        axios.get(`${apiUrl}/reviews/meta`, {params: {product_id: req.query.product_id}})
+          .then(respo => {
+            res.send({...resp.data, ...respo.data});
+          })
+          .catch(err => {
+            console.error(err);
+            res.end();
+          });
+      })
+      .catch(err => {
+        console.error(err);
+        res.end();
+      });
   }
 };
