@@ -4,10 +4,9 @@ import Review from './review';
 import AppContext from '../../../appContext.js';
 import ReviewForm from './reviewForm';
 
-const ReviewList = ({reviews}) => (
+const ReviewList = ({reviews, recommended}) => (
   <div className="reviewList">
-    {/* TODO: GET NUMBER OF REVIEWS VIA STARS? */}
-    <Sorting/>
+    <Sorting recommended={recommended}/>
     <ul style={{
       padding: '0'
     }}>
