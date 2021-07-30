@@ -44,7 +44,7 @@ import axios from 'axios';
 // }
 
 
-const ProductCard = ({id, isStar}) => {
+const ProductCard = ({id, isStar, handleProductChange}) => {
   let [card, setCard] = useState(null);
 
   useEffect(() => {
@@ -57,8 +57,8 @@ const ProductCard = ({id, isStar}) => {
   if (isStar && card) {
     return (
       <div style = {{border: '1.5px solid black', flexBasis: '10.5em', minWidth: '10.5em', margin: '0 1.4%', position: 'relative'}}>
-        <ActionButton isStar = {isStar} chars = {card.characteristics} />
-        <img src={card.url} style={{width: '100%', height: '9em'}}></img>
+        <ActionButton isStar = {isStar} chars = {card}/>
+        <img onClick = {() => handleProductChange(id)}  src={card.url} style={{width: '100%', height: '9em', cursor: 'pointer'}}></img>
         <ProductInfo card = {card} />
       </div>
     );
@@ -66,7 +66,7 @@ const ProductCard = ({id, isStar}) => {
     return (
       <div style = {{border: '1.5px solid black', flexBasis: '10.5em', minWidth: '10.5em', margin: '0 1.4%', position: 'relative'}}>
         <ActionButton isStar = {isStar} chars = {null} />
-        <img src={card.url} style={{width: '100%', height: '9em'}}></img>
+        <img onClick = {() => handleProductChange(id)}  src={card.url} style={{width: '100%', height: '9em', cursor: 'pointer'}}></img>
         <ProductInfo card = {card} />
       </div>
     );

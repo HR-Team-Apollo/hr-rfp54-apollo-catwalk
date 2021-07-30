@@ -20,7 +20,7 @@ class App extends React.Component {
   }
 
   componentDidMount() {
-    axios.get(`http://localhost:3001/api/reviews/chars?product_id=17070`)
+    axios.get('http://localhost:3001/api/reviews/chars?product_id=17070')
       .then(res => {
         this.setState({
           product: res.data
@@ -49,6 +49,18 @@ class App extends React.Component {
     });
   }
 
+  handleProductChange(id) {
+    axios.get(`http://localhost:3001/api/reviews/chars?product_id=${id}`)
+      .then(res => {
+        this.setState({
+          product: res.data
+        });
+      })
+      .catch(err => {
+        console.log('failed to fetch data', err);
+      });
+  }
+
   render() {
     return (
       <React.Fragment>
@@ -61,7 +73,7 @@ class App extends React.Component {
               null
           }
           <Overview />
-          <Related />
+          <Related handleProductChange = {this.handleProductChange.bind(this)}/>
           <QuestionsAndAnswers />
           <Reviews />
         </AppContext.Provider>

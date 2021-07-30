@@ -66,15 +66,18 @@ const convertToArray = (object) => {
 };
 
 const CompareModal = ({compareChars}) => {
-  compareChars = convertToArray(compareChars);
+  let compareName = compareChars.name;
+  compareChars = convertToArray(compareChars.characteristics);
   return (
     <AppContext.Consumer>
       {
-        ({characteristicsChart}) => (
+        ({characteristicsChart, product}) => (
           <div>
             <h4 style = {{textAlign: 'center'}}>Comparing</h4>
-            <h5 style = {{display: 'inline', margin: '0 0 0 2%'}}>Product Short Name</h5>
-            <h5 style = {{display: 'inline', margin: '0 0 0 48%'}}>Product Short Name</h5>
+            <div style={{display: 'flex', justifyContent: 'space-between'}}>
+              <h5 style = {{display: 'inline', margin: '0 0 0 0', flex: '1'}}>{product.name}</h5>
+              <h5 style = {{display: 'inline', margin: '0 0 0 0', flex: '1', textAlign: 'right'}}>{compareName}</h5>
+            </div>
             {
               convertToArray(characteristicsChart).map(curObj => {
                 let keyName = Object.keys(curObj)[0];
