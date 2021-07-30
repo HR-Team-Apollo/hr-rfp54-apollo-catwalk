@@ -5,7 +5,7 @@ import moment from 'moment';
 const Review = ({review}) => (
   <div className='review' style={{
     display: 'block',
-    width: '35rem',
+    maxWidth: '35rem',
     borderBottom: '1px solid grey'}}>
     <div className='review-header' style={{display: 'flex', justifyContent: 'space-between'}}>
       <Stars rating={review.rating}/>
@@ -29,17 +29,11 @@ const Review = ({review}) => (
 
     </div>
 
-    <div className='review-footer'>
+    <div className='review-footer' style={{margin: '1rem 0'}}>
       Helpful?
-      <span onClick={()=>{
+      <span style={{margin: '0 2rem'}} onClick={()=>{
         console.log('helpfulness++')}}>
-        Yes
-        ({review.helpfulness})
-      </span>
-      <span onClick={()=>{
-        console.log('helpfulness--')}}>
-        No
-        ({review.helpfulness})
+        Yes({review.helpfulness})
       </span>
       <span onClick={()=>{
         console.log('Report!');

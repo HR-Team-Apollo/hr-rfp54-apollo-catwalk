@@ -40,20 +40,25 @@ class RatingBreakdown extends React.Component {
 
   render() {
     return(
-      <div className="ratingBreakdown">
-        <div style={{display:'flex'}}>
+      <div className="rating-breakdown">
+        <div className='rating-summary' style={{display:'flex'}}>
           <span className='rating-average' style={{fontSize: '3rem'}}>
             {parseFloat(this.state.avgRatings).toFixed(1)}
           </span>
           <Stars rating={this.state.avgRatings}/>
         </div>
-        <div>
-          <span className='recommendations'>{this.calcPercentage(this.props.recommendations['true'], Number(this.state.totalRecommends))}</span>% of reviews recommend this product
+
+        <div style={{fontSize:'.5rem'}}>
+          <span className='recommendations'>
+            {this.calcPercentage(this.props.recommendations['true'], Number(this.state.totalRecommends))}
+          </span>
+          % of reviews recommend this product
         </div>
         {
+          //TODO: sort in desc order
           Object.entries(this.props.ratings).map(rating => (
-            <div key={rating[0]} style={{display:'flex', marginBottom: '1rem'}}>
-              <span>{rating[0]} stars</span>
+            <div key={rating[0]} style={{display:'flex', marginBottom: '1rem', fontSize: '.5rem'}}>
+              <span style={{textDecoration:'underline'}} onClick={()=>{alert(`show reviews with ${rating[0]} stars`)}}>{rating[0]} stars</span>
               <StarBar starPercentage={this.calcPercentage(rating[1],this.state.totalRatings)}/>
               <span>{rating[1]}</span>
             </div>

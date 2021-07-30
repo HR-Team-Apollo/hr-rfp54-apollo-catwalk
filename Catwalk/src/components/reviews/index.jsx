@@ -42,13 +42,14 @@ class Reviews extends React.Component {
       <div className="reviews container">
         <h2>Ratings &amp; Reviews</h2>
         <div style={{display: 'flex'}}>
-          {/* what all does ratings need? */}
           {this.state.meta? <Ratings ratings={this.state.meta}/>: null}
-          {this.state.reviews?<ReviewList reviews={this.state.reviews}/>: null}
+          {this.state.reviews && this.state.meta?
+            <ReviewList reviews={this.state.reviews} recommended={this.state.meta.recommended} />:
+            null}
         </div>
       </div>
     );
   }
-};
+}
 
 export default Reviews;
