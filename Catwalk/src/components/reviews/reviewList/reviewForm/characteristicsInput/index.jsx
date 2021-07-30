@@ -5,8 +5,8 @@ import AppContext from '../../../../../appContext.js';
 const CharacteristicsInput = ({stateUpdate}) => (
   <div className="review-form-section characteristics">
     <AppContext.Consumer>
-      {({characteristicsChart})=>(
-        Object.entries(characteristicsChart).map((ent, i)=>(
+      {({characterDescriptions})=>(
+        Object.entries(characterDescriptions).map((ent, i)=>(
           <div className={ent[0]} key={i} style={{margin: '.5rem 0', textAlign: 'center', border: '1px solid grey', padding:'.5rem'}}>
             <strong>{ent[0]}</strong>
             <div style={{display: 'flex', flexDirection: 'column'}}>

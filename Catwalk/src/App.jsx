@@ -15,6 +15,14 @@ class App extends React.Component {
         modalShown: false,
         modalContent: null,
         product: null
+      },
+      characterDescriptions: {
+        Size:[ 'A size too small', '½ a size too small', 'Perfect', '½ a size too big', 'A size too wide'],
+        Width: [ 'Too narrow', 'Slightly narrow', 'Perfect', 'Slightly wide', 'Too wide'],
+        Comfort: [ 'Uncomfortable', 'Slightly uncomfortable', 'Ok', 'Comfortable', 'Perfect'],
+        Quality: [ 'Poor', 'Below average', 'What I expected', 'Pretty great', 'Perfect'],
+        Length: [ 'Runs Short', 'Runs slightly short', 'Perfect', 'Runs slightly long', 'Runs long'],
+        Fit: [ 'Runs tight', 'Runs slightly tight', 'Perfect', 'Runs slightly long', 'Runs long']
       }
     };
   }
@@ -70,7 +78,8 @@ class App extends React.Component {
       <React.Fragment>
         <AppContext.Provider value={{openModal: this.openModal.bind(this),
           characteristicsChart: this.state.product ? this.state.product.characteristics : null,
-          product: this.state.product ? this.state.product : null}}>
+          product: this.state.product ? this.state.product : null,
+          characterDescriptions: this.state.characterDescriptions}}>
           {
             (this.state.modal.modalShown && this.state.modal.modalContent)?
               <Modal modalContent={this.state.modal.modalContent} close={this.closeModal.bind(this)}/>:
