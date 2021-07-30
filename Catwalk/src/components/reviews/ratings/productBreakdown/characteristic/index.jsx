@@ -5,7 +5,7 @@ import AppContext from '../../../../../appContext.js';
 const Characteristic = ({characteristic, name}) => {
   return (
     <AppContext.Consumer>
-      {({characteristicsChart}) => (
+      {({characterDescriptions}) => (
         <div className='characteristic'>
           {name}
           <div className='charBar' style={{
@@ -29,15 +29,15 @@ const Characteristic = ({characteristic, name}) => {
             marginBottom: '1rem',
             fontSize: '.5rem'
           }}>
-            <span className='highest'>{characteristicsChart[name][0]}</span>
-            <span className='lowest'>{characteristicsChart[name][4]}</span>
+            <span className='highest'>{characterDescriptions[name][0]}</span>
+            <span className='lowest'>{characterDescriptions[name][4]}</span>
           </div>
           <div style={{
             display: 'flex',
             justifyContent: 'space-between'
           }}>
-            <span className='highest'>{characteristicsChart ? characteristicsChart[Object.keys(characteristicsChart)[0]].value : 'Loading'}</span>
-            <span className='lowest'>{characteristicsChart ? characteristicsChart[Object.keys(characteristicsChart)[0]].value : 'Loading'}</span>
+            <span className='highest'>{characterDescriptions ? characterDescriptions[Object.keys(characterDescriptions)[0]].value : 'Loading'}</span>
+            <span className='lowest'>{characterDescriptions ? characterDescriptions[Object.keys(characterDescriptions)[0]].value : 'Loading'}</span>
           </div>
         </div>
       )}
