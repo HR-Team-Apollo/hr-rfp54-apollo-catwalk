@@ -2,7 +2,7 @@ import React from 'react';
 import AppContext from '../../../../../appContext.js';
 
 
-const CharacteristicsInput = () => (
+const CharacteristicsInput = ({stateUpdate}) => (
   <div className="review-form-section characteristics">
     <AppContext.Consumer>
       {({characteristicsChart})=>(
@@ -17,6 +17,8 @@ const CharacteristicsInput = () => (
                     (e)=>{
                       const selectionTextEl = e.target.parentElement.previousSibling;
                       selectionTextEl.innerText = choice;
+                      // FIXME: only replaces current state with the object below, doesn't add
+                      stateUpdate('characteristics',{[ent[0]]: j + 1});
                     }
                   }/>
                 ))}

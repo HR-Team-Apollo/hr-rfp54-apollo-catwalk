@@ -6,13 +6,14 @@ import ReviewForm from './reviewForm';
 
 const ReviewList = ({reviews}) => (
   <div className="reviewList">
+    {/* TODO: GET NUMBER OF REVIEWS VIA STARS? */}
     <Sorting/>
     <ul style={{
       padding: '0'
     }}>
       {
         reviews.results.map(review=>{
-          return <Review review={review} key={review.review_id}/>
+          return (<Review review={review} key={review.review_id}/>);
         })
       }
     </ul>

@@ -1,18 +1,54 @@
 import React from 'react';
-import mockData from './reviewData.js';
 
 import Ratings from './ratings';
 import ReviewList from './reviewList';
 
-const Reviews = () => (
-  <div className="reviews">
-    <h2>Ratings &amp; Reviews</h2>
-    <div style={{display: 'flex'}}>
-      {/* what all does ratings need? */}
-      <Ratings ratings={mockData}/>
-      <ReviewList reviews={mockData}/>
-    </div>
-  </div>
-);
+
+class Reviews extends React.Component {
+  constructor(props){
+    super(props);
+    this.state = {
+      reviews: null,
+      meta: null
+    };
+  }
+
+  componentDidMount(){
+    fetch('http://localhost:3001/api/reviews', {
+      method: 'GET'
+    })
+      .then(response => response.json())
+      .then(result => {
+        this.setState({reviews: result});
+      })
+      .catch(error => {
+        console.error('Error:', error);
+      });
+
+    fetch('http://localhost:3001/api/reviews/meta/17067', {
+      method: 'GET'
+    })
+      .then(response => response.json())
+      .then(result => {
+        this.setState({meta: result});
+      })
+      .catch(error => {
+        console.error('Error:', error);
+      });
+  }
+
+  render(){
+    return (
+      <div className="reviews container">
+        <h2>Ratings &amp; Reviews</h2>
+        <div style={{display: 'flex'}}>
+          {/* what all does ratings need? */}
+          {this.state.meta? <Ratings ratings={this.state.meta}/>: null}
+          {this.state.reviews?<ReviewList reviews={this.state.reviews}/>: null}
+        </div>
+      </div>
+    );
+  }
+};
 
 export default Reviews;
