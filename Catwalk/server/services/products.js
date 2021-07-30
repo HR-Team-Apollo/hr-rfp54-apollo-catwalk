@@ -2,6 +2,8 @@ const axios = require('axios');
 const CAMPUS_CODE = 'hr-rfp';
 const API_KEY = require('../config/config.js');
 const apiUrl = `https://app-hrsei-api.herokuapp.com/api/fec2/${CAMPUS_CODE}`;
+const path = require('path');
+const fs = require('fs');
 
 axios.defaults.headers.common['Authorization'] = API_KEY;
 
@@ -78,5 +80,32 @@ module.exports = {
       .catch(err => {
         res.send(err);
       });
+  },
+  writeRelatedProducts: (req, res) => {
+    fs.writeFile(path.resolve(__dirname, '..', 'relatedProducts.txt'), req.body.products.toString(), (err) => {
+      if (err) {
+        res.send(err);
+      } else {
+        res.end('ok');
+      }
+    });
+  },
+  readRelatedProducts: (req, res) => {
+    fs.readFile(path.resolve(__dirname, '..', 'relatedProducts.txt'), 'utf-8', (err, products) => {
+      if (err) {
+        res.send(err);
+      } else {
+        let results = products.split(',');
+        if (results.length === 1 && results[0] === '[]') {
+          results = [];
+        } else {
+          for (let i = 0; i < results.length; i++) {
+            results[i] = results[i].trim();
+          }
+        }
+        results = JSON.stringify({products: results});
+        res.send(JSON.parse(results));
+      }
+    });
   }
 };

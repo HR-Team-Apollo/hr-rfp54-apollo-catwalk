@@ -50,15 +50,19 @@ class App extends React.Component {
   }
 
   handleProductChange(id) {
-    axios.get(`http://localhost:3001/api/reviews/chars?product_id=${id}`)
-      .then(res => {
-        this.setState({
-          product: res.data
+    if (id === 17076) {
+      alert('You\'ve found an easter egg!');
+    } else {
+      axios.get(`http://localhost:3001/api/reviews/chars?product_id=${id}`)
+        .then(res => {
+          this.setState({
+            product: res.data
+          });
+        })
+        .catch(err => {
+          console.log('failed to fetch data', err);
         });
-      })
-      .catch(err => {
-        console.log('failed to fetch data', err);
-      });
+    }
   }
 
   render() {
