@@ -11,6 +11,8 @@ const Modal = ({modalContent, close}) => (
   }}>
     <div className='modal' style={{
       minHeight: '30rem',
+      maxHeight: '90vh',
+      overflow: 'scroll',
       width: '30rem',
       backgroundColor: '#fff',
       position: 'absolute',

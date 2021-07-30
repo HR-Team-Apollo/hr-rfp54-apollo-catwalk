@@ -1,119 +1,40 @@
 import React from 'react';
-import Stars from '../../../../utils/stars';
-import AppContext from '../../../../appContext.js';
+import RatingInput from './RatingInput';
+import RecommendationsInput from './recommendationsInput';
+import CharacteristicsInput from './characteristicsInput';
 
 
-//props should have
-// product_id
-// product_name
-// characteristics
-const characteristics = ['Size','Width','Comfort'];
+const mockProps = {
+  product_id: '1',
+  product_name: 'Master Sword',
+  characteristics: ['Size','Width','Comfort']
+};
 
 class ReviewForm extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      rating: 0
+      rating: 0,
+      recommendations: null,
+      characteristics: {}
     };
   }
+
+  updateFormState(key,value){
+    this.setState({[key]: value});
+  }
+
   render(){
     return (
       <form id="review-form">
         <h3 className="form-title">Write Your Review</h3>
-        <h4 className="form-subtitle">About the Some Amazing Product</h4>
+        <h4 className="form-subtitle">{`About the ${mockProps.product_name}`}</h4>
 
-        <div className="review-form-section recommendations">
-          <label>Overall Rating: </label>
-          <div style={{
-            height: '1rem',
-            display: 'flex'
-          }}>
-            <div style={{
-              position: 'relative',
-              width: '10rem'
-            }}>
-              <div style={{position: 'absolute'}} >
-                <Stars rating={this.state.rating} />
-              </div>
-              <div style={{position: 'absolute'}}>
-                {/* TODO: make input transparent */}
-                {['Poor', 'Fair', 'Average', 'Good', 'Great'].map((rating, i) => (
-                  <input
-                    type="radio"
-                    key={rating}
-                    id={`rating-${i + 1}`}
-                    name="rating"
-                    value={i + 1}
-                    data={rating}
-                    style={{
-                      width: '.94rem',
-                      padding: '0',
-                      margin: '0',
-                      border: 'none',
-                      color: 'none'
-                    }}
-                    onChange={()=>{
-                      const reviewForm = document.getElementById('review-form');
-                      const ratings = reviewForm.elements['rating'];
-                      const desc = document.getElementById('ratings-description');
-                      desc.innerText=rating;
-                      this.setState({rating: ratings.value});
-                    }}
-                  ></input>
-                ))}
-              </div>
-            </div>
-            <div style={{width: '10rem'}} id={'ratings-description'}></div>
-          </div>
-        </div>
+        <RatingInput stateRate={this.state.rating} stateUpdate={this.updateFormState.bind(this)}/>
+        <RecommendationsInput stateUpdate={this.updateFormState.bind(this)}/>
+        <CharacteristicsInput stateUpdate={this.updateFormState.bind(this)}/>
 
-        <div className="review-form-section recommendations">
-          <label htmlFor="recommend">Do you recommend this product? </label>
-          <input
-            type="radio"
-            id="recommend-y"
-            name="recommend"
-            value="true"
-            defaultChecked
-          ></input>
-          <label htmlFor="recommend">Yes</label>
-          <input
-            type="radio"
-            id="recommend-n"
-            name="recommend"
-            value="false"
-          ></input>
-          <label htmlFor="recommend">No</label>
-        </div>
 
-        <div className="characteristics">
-          {
-            characteristics.map(char=>(
-              <div key={char} className="review-form-section characteristic">
-                <label>{char}</label>
-                <p id={`${char}-description`}>None selected</p>
-                <AppContext.Consumer>
-                  {({characteristicsChart}) => (
-                    characteristicsChart[char].map(ch => (
-                      <input
-                        type='radio'
-                        id={`characteristic-${char}-${ch}`}
-                        name={char}
-                        key={ch}
-                        onChange={()=>{
-                          const reviewForm = document.getElementById('review-form');
-                          const ratings = reviewForm.elements['rating'];
-                          const desc = document.getElementById('ratings-description');
-                          desc.innerText=rating;
-                          this.setState({rating: ratings.value});
-                        }}
-                      />)
-                    ))}
-                </AppContext.Consumer>
-              </div>
-            ))
-          }
-        </div>
 
         <div className="review-form-section summary">
           <label htmlFor="summary">Summary: </label>
@@ -125,7 +46,8 @@ class ReviewForm extends React.Component {
             maxLength="60"
           />
         </div>
-        <div className="review-form-section">
+
+        {/* <div className="review-form-section">
           <label htmlFor="body">body: </label>
           <input
             type="textarea"
@@ -135,13 +57,21 @@ class ReviewForm extends React.Component {
             maxLength="1000"
             minLength="50"
             required
+            onChange={
+              (e)=>{
+                e.target.value.length <= e.target.minLength?
+                  document.getElementById('charCount').innerText = (e.target.minLength - e.target.value.length):
+
+              }
+            }
           />
-          {/* if the length of text inputed is 50 change below to "Minimum reached" */}
-          <p>
+          <p id="minimum">
             Minimum required characters left:{' '}
-            <span className="charCount">50</span>
+            <span id="charCount">50</span>
           </p>
+          <p id="minReached">Minimum reached</p>
         </div>
+         */}
         <div className="review-form-section">
           {/* A button will appear allowing users to upload their photos to the form.
             Clicking the button should open a separate window where the photo to be can be selected.
