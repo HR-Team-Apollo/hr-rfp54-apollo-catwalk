@@ -5,6 +5,7 @@ import Related from './components/related';
 import Reviews from './components/reviews';
 import Modal from './utils/modal';
 import AppContext from './appContext.js';
+import axios from 'axios';
 
 class App extends React.Component {
   constructor(props) {
@@ -12,9 +13,22 @@ class App extends React.Component {
     this.state = {
       modal: {
         modalShown: false,
-        modalContent: null
+        modalContent: null,
+        product: null
       }
     };
+  }
+
+  componentDidMount() {
+    axios.get(`http://localhost:3001/api/reviews/chars?product_id=17070`)
+      .then(res => {
+        this.setState({
+          product: res.data
+        });
+      })
+      .catch(err => {
+        console.log('failed to fetch data', err);
+      });
   }
 
   closeModal() {
@@ -38,20 +52,15 @@ class App extends React.Component {
   render() {
     return (
       <React.Fragment>
-        {
-          (this.state.modal.modalShown && this.state.modal.modalContent)?
-            <Modal modalContent={this.state.modal.modalContent} close={this.closeModal.bind(this)}/>:
-            null
-        }
-        <Overview />
-        <AppContext.Provider value={{openModal: this.openModal.bind(this), characteristicsChart: {
-          Size:[ 'A size too small', '½ a size too small', 'Perfect', '½ a size too big', 'A size too wide'],
-          Width: [ 'Too narrow', 'Slightly narrow', 'Perfect', 'Slightly wide', 'Too wide'],
-          Comfort: [ 'Uncomfortable', 'Slightly uncomfortable', 'Ok', 'Comfortable', 'Perfect'],
-          Quality: [ 'Poor', 'Below average', 'What I expected', 'Pretty great', 'Perfect'],
-          Length: [ 'Runs Short', 'Runs slightly short', 'Perfect', 'Runs slightly long', 'Runs long'],
-          Fit: [ 'Runs tight', 'Runs slightly tight', 'Perfect', 'Runs slightly long', 'Runs long']
-        }}}>
+        <AppContext.Provider value={{openModal: this.openModal.bind(this),
+          characteristicsChart: this.state.product ? this.state.product.characteristics : null,
+          product: this.state.product ? this.state.product : null}}>
+          {
+            (this.state.modal.modalShown && this.state.modal.modalContent)?
+              <Modal modalContent={this.state.modal.modalContent} close={this.closeModal.bind(this)}/>:
+              null
+          }
+          <Overview />
           <Related />
           <QuestionsAndAnswers />
           <Reviews />

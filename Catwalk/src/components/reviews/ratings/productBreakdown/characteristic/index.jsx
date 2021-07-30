@@ -26,8 +26,8 @@ const Characteristic = ({characteristic, name}) => (
           display: 'flex',
           justifyContent: 'space-between'
         }}>
-          <span className='highest'>{characteristicsChart[name][0]}</span>
-          <span className='lowest'>{characteristicsChart[name][4]}</span>
+          <span className='highest'>{characteristicsChart ? characteristicsChart[Object.keys(characteristicsChart)[0]].value : 'Loading'}</span>
+          <span className='lowest'>{characteristicsChart ? characteristicsChart[Object.keys(characteristicsChart)[0]].value : 'Loading'}</span>
         </div>
       </div>
     )}

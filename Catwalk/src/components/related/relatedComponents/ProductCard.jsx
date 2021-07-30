@@ -50,7 +50,6 @@ const ProductCard = ({id, isStar}) => {
   useEffect(() => {
     axios.get(`http://localhost:3001/api/products/${id}/related/all`)
       .then(res => {
-        console.log(res.data);
         setCard(res.data);
       });
   }, []);
@@ -58,7 +57,7 @@ const ProductCard = ({id, isStar}) => {
   if (isStar && card) {
     return (
       <div style = {{border: '1.5px solid black', flexBasis: '10.5em', minWidth: '10.5em', margin: '0 1.4%', position: 'relative'}}>
-        <ActionButton isStar = {isStar}/>
+        <ActionButton isStar = {isStar} chars = {card.characteristics} />
         <img src={card.url} style={{width: '100%', height: '9em'}}></img>
         <ProductInfo card = {card} />
       </div>
@@ -66,7 +65,7 @@ const ProductCard = ({id, isStar}) => {
   } else  if (card) {
     return (
       <div style = {{border: '1.5px solid black', flexBasis: '10.5em', minWidth: '10.5em', margin: '0 1.4%', position: 'relative'}}>
-        <ActionButton isStar = {isStar}/>
+        <ActionButton isStar = {isStar} chars = {null} />
         <img src={card.url} style={{width: '100%', height: '9em'}}></img>
         <ProductInfo card = {card} />
       </div>
