@@ -1,10 +1,11 @@
 import React from 'react';
 import AppContext from '../../../../../appContext.js';
 
+
 const Characteristic = ({characteristic, name}) => {
   return (
     <AppContext.Consumer>
-      {/* {({characteristicsChart}) => (
+      {({characteristicsChart}) => (
         <div className='characteristic'>
           {name}
           <div className='charBar' style={{
@@ -39,7 +40,7 @@ const Characteristic = ({characteristic, name}) => {
             <span className='lowest'>{characteristicsChart ? characteristicsChart[Object.keys(characteristicsChart)[0]].value : 'Loading'}</span>
           </div>
         </div>
-      )} */}
+      )}
     </AppContext.Consumer>
   );
 }
