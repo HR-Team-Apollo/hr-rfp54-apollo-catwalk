@@ -2,57 +2,66 @@ import React from 'react';
 import Stars from '../../../../utils/stars';
 import StarBar from './starBar';
 
-let ratings = {
-  2: 1,
-  3: 1,
-  4: 2,
-  1: 1,
-  5: 5
-};
+class RatingBreakdown extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      totalRatings: this.calcTotal(this.props.ratings),
+      avgRatings: null,
+      totalRecommends: this.calcTotal(this.props.recommendations)
+    };
+  }
 
-let recommendations = {
-  0: 5,
-  1: 9
-};
+  calcTotal (obj) {
+    let sum = 0;
+    Object.values(obj).forEach(val => {
+      sum += Number(val);
+    });
+    return sum;
+  }
 
-const calcTotal = (obj) => {
-  return Object.values(obj).reduce((acc, val)=>{
-    return acc += val;
-  });
-};
+  calcAvgRatings (obj) {
+    let sum = 0;
+    Object.entries(obj).forEach(([key,value])=>{
+      sum += key * Number(value);
+    });
+    const avg = sum/this.state.totalRatings;
+    return avg;
+  }
 
-const calcAvg = (obj) => {
-  let sum = 0;
-  Object.entries(obj).forEach(([key,value])=>{
-    sum += key * value;
-  });
-  const avg = sum/totalRatings;
-  return avg;
-};
+  calcPercentage (val, tot) {
+    return Math.trunc((val/tot) * 100);
+  }
 
-const calcPercentage = (val, tot) => {
-  return Math.trunc((val/tot) * 100);
-};
+  componentDidMount(){
+    const avg = this.calcAvgRatings(this.props.ratings);
+    this.setState({avgRatings:avg});
+  }
 
-const totalRatings = calcTotal(ratings);
-const avgRatings= calcAvg(ratings);
-
-const totalRecommends = calcTotal(recommendations);
-
-const RatingBreakdown = ({/*ratings, recommendations */}) => (
-  <div className="ratingBreakdown">
-    <span className='rating-average'>{avgRatings}</span>
-    <Stars rating={avgRatings}/>
-    <div>
-      <span className='recommendations'>{calcPercentage(recommendations[1], totalRecommends)}</span>% of reviews recommend this product
-    </div>
-    {
-      /*TODO: reverse order */
-      Object.entries(ratings).map(rating => (
-        <div key={rating[0]}>{rating[0]} stars <StarBar starPercentage={calcPercentage(rating[1],totalRatings)}/></div>
-      ))
-    }
-  </div>
-);
+  render() {
+    return(
+      <div className="ratingBreakdown">
+        <div style={{display:'flex'}}>
+          <span className='rating-average' style={{fontSize: '3rem'}}>
+            {parseFloat(this.state.avgRatings).toFixed(1)}
+          </span>
+          <Stars rating={this.state.avgRatings}/>
+        </div>
+        <div>
+          <span className='recommendations'>{this.calcPercentage(this.props.recommendations['true'], Number(this.state.totalRecommends))}</span>% of reviews recommend this product
+        </div>
+        {
+          Object.entries(this.props.ratings).map(rating => (
+            <div key={rating[0]} style={{display:'flex', marginBottom: '1rem'}}>
+              <span>{rating[0]} stars</span>
+              <StarBar starPercentage={this.calcPercentage(rating[1],this.state.totalRatings)}/>
+              <span>{rating[1]}</span>
+            </div>
+          ))
+        }
+      </div>
+    );
+  }
+}
 
 export default RatingBreakdown;

@@ -31,7 +31,7 @@ const Characteristic = ({characteristic, name}) => (
         </div>
       </div>
     )}
-</AppContext.Consumer>
+  </AppContext.Consumer>
 );
 
 export default Characteristic;
