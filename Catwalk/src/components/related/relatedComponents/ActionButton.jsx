@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import AppContext from '../../../appContext.js';
 import CompareModal from './CompareModal.jsx';
 
-const ActionButton = ({isStar}) => {
+const ActionButton = ({isStar, chars}) => {
 
   let [isHover, setHover] = useState(false);
 
@@ -10,7 +10,7 @@ const ActionButton = ({isStar}) => {
     return (
       <AppContext.Consumer>
         { context => (
-          <div onMouseEnter={() => setHover(true)} onMouseLeave ={() => setHover(false)} onClick = {() => context.openModal(<CompareModal />)} style = {{position: 'absolute', right: '0.5em', top: '0.5em', color: 'yellow', cursor: 'pointer'}}>
+          <div onMouseEnter={() => setHover(true)} onMouseLeave ={() => setHover(false)} onClick = {() => context.openModal(<CompareModal compareChars = {chars}/>)} style = {{position: 'absolute', right: '0.5em', top: '0.5em', color: 'yellow', cursor: 'pointer'}}>
             <i className={isHover ? 'fa fa-star' : 'fa fa-star-o'}></i>
           </div>
         )

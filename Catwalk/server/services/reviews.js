@@ -72,7 +72,21 @@ module.exports = {
       .then(resp => {
         axios.get(`${apiUrl}/reviews/meta`, {params: {product_id: req.query.product_id}})
           .then(respo => {
-            res.send({...resp.data, ...respo.data});
+            axios.get(`${apiUrl}/products/${req.query.product_id}/styles`)
+              .then(respon => {
+                axios.get(`${apiUrl}/products/${req.query.product_id}`)
+                  .then(response => {
+                    res.send({...resp.data, ...respo.data, ...respon.data, ...response.data});
+                  })
+                  .catch(err => {
+                    console.error(err);
+                    res.end();
+                  });
+              })
+              .catch(err => {
+                console.error(err);
+                res.end();
+              });
           })
           .catch(err => {
             console.error(err);

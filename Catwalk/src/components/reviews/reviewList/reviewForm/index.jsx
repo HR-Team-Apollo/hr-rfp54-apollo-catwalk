@@ -1,5 +1,5 @@
 import React from 'react';
-import RatingInput from './RatingInput';
+import RatingInput from './ratingInput';
 import RecommendationsInput from './recommendationsInput';
 import CharacteristicsInput from './characteristicsInput';
 
