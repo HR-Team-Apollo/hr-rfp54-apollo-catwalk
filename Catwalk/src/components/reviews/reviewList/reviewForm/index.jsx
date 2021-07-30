@@ -2,6 +2,7 @@ import React from 'react';
 import RatingInput from './ratingInput';
 import RecommendationsInput from './recommendationsInput';
 import CharacteristicsInput from './characteristicsInput';
+import SummaryInput from './summaryInput';
 
 
 const mockProps = {
@@ -16,7 +17,8 @@ class ReviewForm extends React.Component {
     this.state = {
       rating: 0,
       recommendations: null,
-      characteristics: {}
+      characteristics: {},
+      summary: null
     };
   }
 
@@ -33,19 +35,8 @@ class ReviewForm extends React.Component {
         <RatingInput stateRate={this.state.rating} stateUpdate={this.updateFormState.bind(this)}/>
         <RecommendationsInput stateUpdate={this.updateFormState.bind(this)}/>
         <CharacteristicsInput stateUpdate={this.updateFormState.bind(this)}/>
-
-
-
-        <div className="review-form-section summary">
-          <label htmlFor="summary">Summary: </label>
-          <input
-            type="text"
-            name="summary"
-            id="summary"
-            placeholder="Example: Best purchase ever!"
-            maxLength="60"
-          />
-        </div>
+        {/* fix the characteristics state update */}
+        <SummaryInput/>
 
         {/* <div className="review-form-section">
           <label htmlFor="body">body: </label>
