@@ -2,6 +2,7 @@ const router = require('express').Router();
 const products = require('./services/products.js');
 const reviews = require('./services/reviews.js');
 
+
 router.get('/products', products.getAllProducts);
 
 router.get('/products/:product_id', (req, res) => products.getProduct(req, res, req.params.product_id));
@@ -16,7 +17,9 @@ router.get('/reviews', reviews.getAllReviews);
 
 router.get('/reviews/meta/:product_id', reviews.getAllReviewsMeta);
 
-router.post('/reviews', reviews.postReview);
+router.post('/reviews', (req, res)=> {
+  reviews.postReview(req, res);
+});
 
 router.put('/reviews/:review_id/helpful', reviews.markAsHelpful);
 

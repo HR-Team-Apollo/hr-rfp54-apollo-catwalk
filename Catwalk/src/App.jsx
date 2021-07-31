@@ -81,9 +81,9 @@ class App extends React.Component {
               <Modal modalContent={this.state.modal.modalContent} close={this.closeModal.bind(this)}/>:
               null
           }
-          <Overview />
+          {/* <Overview /> */}
           <Related handleProductChange = {this.handleProductChange.bind(this)}/>
-          <QuestionsAndAnswers />
+          {/* <QuestionsAndAnswers /> */}
           <Reviews />
         </AppContext.Provider>
       </React.Fragment>
