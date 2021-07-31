@@ -34,63 +34,61 @@ class ReviewForm extends React.Component {
         newState[k] = value[k];
       });
       this.setState({characteristics: newState});
+    } else {
+      this.setState({[key]: value});
     }
-    this.setState({[key]: value});
   }
 
   render(){
     return (
-      <form id="review-form">
-        <h3 className="form-title">Write Your Review</h3>
-        <AppContext.Consumer>
-          {
-            ({product}) =>{
-              <h4 className="form-subtitle">{`About the ${product.name}`}</h4>
+      <AppContext.Consumer>
+        {({product, openModal}) =>(
+          <form id="review-form">
+            <h3 className="form-title">Write Your Review</h3>
+            <h4 className="form-subtitle">{`About the ${product.name}`}</h4>
+            <RatingInput stateRate={this.state.rating} stateUpdate={this.updateFormState.bind(this)}/>
+            <RecommendInput stateUpdate={this.updateFormState.bind(this)}/>
+            <CharacteristicsInput stateUpdate={this.updateFormState.bind(this)}/>
+            {/* FIXME: fix the characteristics state update
+            characteristics	object	Object of keys representing characteristic_id and values representing the review value for that characteristic. { "14": 5, "15": 5 //...}
+            */}
+            <SummaryInput stateUpdate={this.updateFormState.bind(this)}/>
+            <BodyInput stateUpdate={this.updateFormState.bind(this)}/>
+            <PhotosInput stateUpdate={this.updateFormState.bind(this)}/>
+            <EmailInput stateUpdate={this.updateFormState.bind(this)}/>
+            <NameInput stateUpdate={this.updateFormState.bind(this)}/>
+            <button type="submit" onClick={
+              (e)=>{
+                e.preventDefault();
+                fetch(
+                  'http://localhost:3001/api/reviews',
+                  {
+                    'method': 'POST',
+                    // 'headers': {
+                    //   'Content-Type': 'application/json'
+                    // },
+                    'data': JSON.stringify({
+                      'product_id': this.state.product_id,
+                      'rating': this.state.rating,
+                      'summary': this.state.summary,
+                      'body': this.state.body,
+                      'recommend': this.state.recommend,
+                      'photos': this.state.photos,
+                      'email': this.state.email,
+                      'name': this.state.name,
+                      'characteristics': this.state.characteristics
+                    }),
+                  })
+                  .then(res=>openModal(<p>Thank you for submitting your review</p>))
+                  .catch(err=>console.log(err));
+              }
             }
-          }
-        </AppContext.Consumer>
-
-        <RatingInput stateRate={this.state.rating} stateUpdate={this.updateFormState.bind(this)}/>
-        <RecommendInput stateUpdate={this.updateFormState.bind(this)}/>
-        <CharacteristicsInput stateUpdate={this.updateFormState.bind(this)}/>
-        {/* FIXME: fix the characteristics state update
-          characteristics	object	Object of keys representing characteristic_id and values representing the review value for that characteristic. { "14": 5, "15": 5 //...}
-        */}
-        <SummaryInput stateUpdate={this.updateFormState.bind(this)}/>
-        <BodyInput stateUpdate={this.updateFormState.bind(this)}/>
-        <PhotosInput stateUpdate={this.updateFormState.bind(this)}/>
-        <EmailInput stateUpdate={this.updateFormState.bind(this)}/>
-        <NameInput stateUpdate={this.updateFormState.bind(this)}/>
-        <button type="submit" onClick={
-          (e)=>{
-            e.preventDefault();
-            fetch(
-              'http://localhost:3001/reviews',
-              {
-                'method': 'POST',
-                'headers': {
-                  'Content-Type': 'application/json'
-                },
-                'data': JSON.stringify({
-                  'product_id': this.state.product_id,
-                  'rating': this.state.rating,
-                  'summary': this.state.summary,
-                  'body': this.state.body,
-                  'recommend': this.state.recommend,
-                  'photos': this.state.photos,
-                  'email': this.state.email,
-                  'name': this.state.name,
-                  'characteristics': this.state.characteristics
-                }),
-              })
-              .then(res=>console.log(res))
-              .catch(err=>console.log(err));
-          }
-        }
-        >
+            >
           Submit
-        </button>
-      </form>
+            </button>
+          </form>
+        )}
+      </AppContext.Consumer>
     );
   }
 }
