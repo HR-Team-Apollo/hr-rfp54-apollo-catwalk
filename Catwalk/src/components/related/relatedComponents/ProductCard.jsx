@@ -56,17 +56,17 @@ const ProductCard = ({id, isStar, handleProductChange, removeOutfit}) => {
 
   if (isStar && card) {
     return (
-      <div style = {{border: '1.5px solid black', flexBasis: '10.5em', minWidth: '10.5em', margin: '0 1.4%', position: 'relative'}}>
+      <div style = {{border: '1.5px solid black', flexBasis: '14em', minWidth: '14em', margin: '0 1.4%', position: 'relative'}}>
         <ActionButton isStar = {isStar} chars = {card}/>
-        <img onClick = {() => handleProductChange(id)}  src={card.url} style={{width: '100%', height: '9em', cursor: 'pointer'}}></img>
+        <img onClick = {() => handleProductChange(id)}  src={card.url ? card.url : 'https://bcn85ztt.tinifycdn.com/wp-content/themes/karibik-shop/img/platzhalter-bild.png'} style={{width: '100%', height: '13em', cursor: 'pointer'}}></img>
         <ProductInfo card = {card} />
       </div>
     );
   } else  if (card) {
     return (
-      <div style = {{border: '1.5px solid black', flexBasis: '10.5em', minWidth: '10.5em', margin: '0 1.4%', position: 'relative'}}>
+      <div style = {{border: '1.5px solid black', flexBasis: '14em', minWidth: '14em', margin: '0 1.4%', position: 'relative'}}>
         <ActionButton removeOutfit = {removeOutfit} isStar = {isStar} chars = {id} />
-        <img onClick = {() => handleProductChange(id)}  src={card.url} style={{width: '100%', height: '9em', cursor: 'pointer'}}></img>
+        <img onClick = {() => handleProductChange(id)}  src={card.url ? card.url : 'https://bcn85ztt.tinifycdn.com/wp-content/themes/karibik-shop/img/platzhalter-bild.png'} style={{width: '100%', height: '13em', cursor: 'pointer'}}></img>
         <ProductInfo card = {card} />
       </div>
     );

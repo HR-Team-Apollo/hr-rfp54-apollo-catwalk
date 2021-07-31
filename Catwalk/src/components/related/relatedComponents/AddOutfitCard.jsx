@@ -5,7 +5,7 @@ const AddOutfitCard = ({id, addProductToOutfit}) => {
   let backColor = isHover ? 'rgb(205, 205, 205)' : 'rgb(227, 227, 227)';
 
   return (
-    <div onClick = {() => addProductToOutfit(id)} onMouseEnter={() => setHover(true)} onMouseLeave={() => setHover(false)} style = {{flexBasis: '11em', margin: '0 1.4%', position: 'relative', backgroundColor: backColor, cursor: 'pointer', minWidth: '10.5em'}}>
+    <div onClick = {() => addProductToOutfit(id)} onMouseEnter={() => setHover(true)} onMouseLeave={() => setHover(false)} style = {{flexBasis: '11em', margin: '0 1.4%', position: 'relative', backgroundColor: backColor, cursor: 'pointer', minWidth: '14.2em'}}>
       <div style = {{width: '100%', display: 'flex'}}>
         <span style = {{fontSize: '6em', fontWeight: '900', flex: '1', textAlign: 'center', marginTop: '0.35em'}}>+</span>
       </div>

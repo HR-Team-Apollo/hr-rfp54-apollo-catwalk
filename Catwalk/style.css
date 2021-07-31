@@ -115,7 +115,9 @@ button {
 
 
 /* RELATED */
-
+.yourOutfitSliderAnim {
+  transition: 0.3s;
+}
 
 
 /* Q & A */

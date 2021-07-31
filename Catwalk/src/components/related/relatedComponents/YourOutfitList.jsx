@@ -2,8 +2,9 @@ import React, {useState, useEffect} from 'react';
 import ProductCard from './ProductCard.jsx';
 import AddOutfitCard from './AddOutfitCard.jsx';
 import axios from 'axios';
+import { AiFillCaretLeft, AiFillCaretRight } from 'react-icons/ai';
 
-const YourOutfitList = ({id}) => {
+const YourOutfitList = ({id, handleProductChange}) => {
   let [outfitProducts, setOutfitProducts] = useState([]);
 
   useEffect(() => {
@@ -13,23 +14,29 @@ const YourOutfitList = ({id}) => {
       });
   }, []);
 
+  useEffect(() => {
+    document.getElementById('outfitArrLeft').style.display = 'none';
+  }, []);
+
   const addProductToOutfit = (id) => {
     let newProducts = outfitProducts.slice();
-    newProducts.push(id);
-    let data = {products: newProducts};
-    axios.post('http://localhost:3001/api/write', data)
-      .then(() => {
-        axios.get('http://localhost:3001/api/read')
-          .then(res => {
-            setOutfitProducts(res.data.products);
-          })
-          .catch(err => {
-            console.log('failed to retrieve data', err);
-          });
-      })
-      .catch(err => {
-        console.log('failed to post data', err);
-      });
+    if (!newProducts.includes(id)) {
+      newProducts.push(id);
+      let data = {products: newProducts};
+      axios.post('http://localhost:3001/api/write', data)
+        .then(() => {
+          axios.get('http://localhost:3001/api/read')
+            .then(res => {
+              setOutfitProducts(res.data.products);
+            })
+            .catch(err => {
+              console.log('failed to retrieve data', err);
+            });
+        })
+        .catch(err => {
+          console.log('failed to post data', err);
+        });
+    }
   };
 
   const removeOutfit = (id) => {
@@ -52,13 +59,38 @@ const YourOutfitList = ({id}) => {
   };
 
   return (
-    <div style = {{display: 'flex', justifyContent: 'flex-start'}}>
-      {
-        outfitProducts.map((prodId) => {
-          return <ProductCard removeOutfit = {removeOutfit} isStar = {false} key = {prodId} id = {prodId}/>;
-        })
-      }
-      <AddOutfitCard id = {id} addProductToOutfit = {addProductToOutfit}/>
+    <div style={{position: 'relative'}}>
+      <div id = 'outfitArrLeft'  onClick = {(e) => {
+        let slider = document.getElementById('yourOutfitSlider');
+        slider.scrollLeft -= slider.scrollWidth / 4.6;
+        console.log(slider.scrollLeft);
+        if (slider.scrollLeft <= 0) {
+          console.log('this is true');
+          e.target.style.display = 'none';
+        }
+        document.getElementById('outfitArrRight').style.display = 'inline-block';
+      }}  style={{fontSize: '6em', position: 'absolute', top: '0.85em', left: '0', zIndex: '10', cursor: 'pointer'}}>
+        <AiFillCaretLeft />
+      </div>
+      <div id = 'yourOutfitSlider' style = {{display: 'flex', justifyContent: 'flex-start', width: '90%', overflow: 'hidden', paddingLeft: '3em'}}>
+        {
+          outfitProducts.map((prodId) => {
+            return <ProductCard handleProductChange = {handleProductChange} removeOutfit = {removeOutfit} isStar = {false} key = {prodId} id = {prodId}/>;
+          })
+        }
+        <AddOutfitCard id = {id} addProductToOutfit = {addProductToOutfit}/>
+      </div>
+      <div id = 'outfitArrRight' onClick = {(e) => {
+        let slider = document.getElementById('yourOutfitSlider');
+        slider.scrollLeft += slider.scrollWidth / 4.6;
+        console.log(slider.scrollLeft + slider.clientWidth);
+        if (slider.scrollLeft + slider.clientWidth >= slider.scrollWidth) {
+          e.target.style.display = 'none';
+        }
+        document.getElementById('outfitArrLeft').style.display = 'inline-block';
+      }} style={{fontSize: '6em', position: 'absolute', top: '0.85em', right: '2.7%', zIndex: '10', cursor: 'pointer'}}>
+        <AiFillCaretRight />
+      </div>
     </div>
   );
 };
