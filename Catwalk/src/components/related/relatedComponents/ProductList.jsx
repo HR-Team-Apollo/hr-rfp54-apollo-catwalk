@@ -67,7 +67,7 @@ class ProductList extends React.Component {
       <div style = {{display: 'flex', justifyContent: 'flex-start'}}>
         {
           this.state.relatedProducts.map((prodId) => {
-            return <ProductCard handleProductChange = {this.props.handleProductChange} key = {prodId} isStar = {true} id = {prodId} />;
+            return <ProductCard removeOutfit = {null} handleProductChange = {this.props.handleProductChange} key = {prodId} isStar = {true} id = {prodId} />;
           })
         }
       </div>
