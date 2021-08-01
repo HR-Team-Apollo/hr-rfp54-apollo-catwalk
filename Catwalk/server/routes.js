@@ -14,6 +14,7 @@ router.get('/products/:product_id/related', (req, res) => products.getProductsRe
 router.get('/products/:product_id/related/all', products.getAllRelatedProducts);
 
 router.get('/reviews', reviews.getAllReviews);
+
 router.get('/reviews/reviewPage/:product_id/:page/:count/:sort', (req, res)=>reviews.getReviewPage(req, res));
 
 

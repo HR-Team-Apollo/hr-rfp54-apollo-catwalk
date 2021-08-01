@@ -55,10 +55,20 @@ class RatingBreakdown extends React.Component {
           % of reviews recommend this product
         </div>
         {
-          //TODO: sort in desc order
-          Object.entries(this.props.ratings).map(rating => (
-            <div key={rating[0]} style={{display:'flex', marginBottom: '1rem', fontSize: '.5rem'}}>
-              <span style={{textDecoration:'underline'}} onClick={()=>{alert(`show reviews with ${rating[0]} stars`)}}>{rating[0]} stars</span>
+          Object.entries(this.props.ratings).reverse().map(rating => (
+            <div
+              key={rating[0]}
+              style={{
+                display:'flex',
+                marginBottom: '1rem',
+                fontSize: '.5rem'}}>
+              <span
+                className='clickMe'
+                style={{textDecoration:'underline'}}
+                onClick={()=>{
+                  //TODO: filters results to only show selected
+                  alert(`show reviews with ${rating[0]} stars`);
+                }}>{rating[0]} stars</span>
               <StarBar starPercentage={this.calcPercentage(rating[1],this.state.totalRatings)}/>
               <span>{rating[1]}</span>
             </div>

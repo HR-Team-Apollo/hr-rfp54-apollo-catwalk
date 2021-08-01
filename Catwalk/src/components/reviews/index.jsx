@@ -17,40 +17,47 @@ class Reviews extends React.Component {
     };
   }
 
-  moreReviewsHandler(){
-    let currPage = this.state.page + 1;
-    this.setState({page: currPage});
-    console.log(this.state.page, currPage);
-    fetch(`http://localhost:3001/api/reviews/reviewPage/${this.state.id}/${currPage}/${this.state.count}/${this.state.sort}`, {
-      method: 'GET'
-    })
-      .then(response => response.json())
-      .then(result => {
-        console.log(result);
-        this.setState({reviews: result});
-      })
-      .catch(error => {
-        console.error('Error:', error);
-      });
+  moreReviewsHandler(e){
+    this.setState({page: ++this.state.page},
+      this.getReviews(result => {
+        let currReviews = Array.from(this.state.reviews.results);
+        currReviews = currReviews.concat(result.results);
+        if(result.results.length === 0) {
+          e.target.style.display = 'none';
+        }
+        this.setState({reviews: {results: currReviews}});
+      }));
   }
 
-  sortReviewsHandler(obj) {
-    console.log('sort by ' + obj.sort);
-  }
-
-  componentDidMount(){
+  getReviews(next) {
     fetch(`http://localhost:3001/api/reviews/reviewPage/${this.state.id}/${this.state.page}/${this.state.count}/${this.state.sort}`, {
       method: 'GET'
     })
       .then(response => response.json())
       .then(result => {
-        console.log(result);
-        this.setState({reviews: result});
+        next(result);
       })
       .catch(error => {
         console.error('Error:', error);
       });
+  }
 
+  sortReviewsHandler(sortOption) {
+    //once called duplicates are rendered
+    this.setState({reviews: null},
+      this.setState({page: 1},
+        this.setState({sort: sortOption}, ()=>{
+          this.getReviews(res=>{
+            console.log(res);
+            this.setState({reviews: res});
+          });
+        })));
+  }
+
+  componentDidMount(){
+    this.getReviews((res)=>{
+      this.setState({reviews: res});
+    });
     //refactor code to pull from app state instead of this redundant server call
     fetch(`http://localhost:3001/api/reviews/meta/${this.state.id}`, {
       method: 'GET'

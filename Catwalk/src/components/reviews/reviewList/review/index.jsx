@@ -1,6 +1,7 @@
 import React from 'react';
 import Stars from '../../../../utils/stars';
 import moment from 'moment';
+import ReviewBody from './reviewBody';
 
 const Review = ({review}) => (
   <div className='review' style={{
@@ -16,7 +17,9 @@ const Review = ({review}) => (
     </div>
 
     <div className='review-body'>
-      <div className='summary' style={{overflow: 'hidden', textOverflow: 'ellipsis', fontWeight: 'bold'}}>{review.summary}</div>
+      <div className='summary' style={{overflow: 'hidden', textOverflow: 'ellipsis', fontWeight: 'bold'}}>
+        {review.summary}
+      </div>
 
       {review.recommend?
         <div className='review-recommend'>
@@ -24,7 +27,7 @@ const Review = ({review}) => (
           I recommend this product</div>:
         null
       }
-      <div className='body'>{review.body}</div>
+      <ReviewBody text={review.body}/>
       {
         review.response?
           <div className='response' style={{background: 'lightgrey'}}>

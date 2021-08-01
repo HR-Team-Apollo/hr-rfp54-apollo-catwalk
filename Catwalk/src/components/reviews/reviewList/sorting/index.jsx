@@ -6,9 +6,9 @@ const Sorting = ({recommended, clickHandler}) => {
     <div className='sorting'>
       <p>
         <span>{totalReviews}</span> reviews, sorted by
-        <select name="sort" id="sortBy" style={{background: 'transparent', border: 'none', fontFamily: 'inherit'}} onChange={
+        <select className='clickMe' name="sort" id="sortBy" style={{background: 'transparent', border: 'none', fontFamily: 'inherit'}} onChange={
           (e)=>{
-            clickHandler({'sort': e.target.value});
+            clickHandler(e.target.value);
           }
         }>
           <option value="relevance">relevance</option>
