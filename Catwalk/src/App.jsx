@@ -30,6 +30,7 @@ class App extends React.Component {
   componentDidMount() {
     axios.get('http://localhost:3001/api/reviews/chars?product_id=17070')
       .then(res => {
+        console.log(res);
         this.setState({
           product: res.data
         });
@@ -84,7 +85,10 @@ class App extends React.Component {
           {/* <Overview /> */}
           <Related handleProductChange = {this.handleProductChange.bind(this)}/>
           {/* <QuestionsAndAnswers /> */}
-          <Reviews />
+          {
+            this.state.product?
+              <Reviews id={this.state.product.id}/>: null
+          }
         </AppContext.Provider>
       </React.Fragment>
     );

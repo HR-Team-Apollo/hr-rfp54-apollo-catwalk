@@ -4,6 +4,10 @@ body {
   background-image: linear-gradient(#d4ead273, #b8b8b96e), url('../bgTile.png');
 }
 
+.clickMe:hover {
+  cursor: pointer;
+}
+
 .container{
   max-width: 850px;
   margin: 0 auto;
