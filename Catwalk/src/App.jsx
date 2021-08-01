@@ -6,11 +6,29 @@ import Reviews from './components/reviews';
 import Modal from './utils/modal';
 import AppContext from './appContext.js';
 import axios from 'axios';
+import styled, {ThemeProvider} from 'styled-components';
+
+const lightTheme = {
+  background: 'white',
+  mainFont: '#424141',
+};
+
+const darkTheme = {
+  background: '#191919',
+  mainFont: '#bfbfbf',
+};
+
+const AppContainer = styled.div`
+  background: ${props=>props.theme.background};
+  color: ${props=>props.theme.mainFont};
+  padding: 2rem 0
+`;
 
 class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      darkMode: false,
       modal: {
         modalShown: false,
         modalContent: null,
@@ -72,25 +90,34 @@ class App extends React.Component {
 
   render() {
     return (
-      <React.Fragment>
-        <AppContext.Provider value={{openModal: this.openModal.bind(this),
-          characteristicsChart: this.state.product ? this.state.product.characteristics : null,
-          product: this.state.product ? this.state.product : null,
-          characterDescriptions: this.state.characterDescriptions}}>
-          {
-            (this.state.modal.modalShown && this.state.modal.modalContent)?
-              <Modal modalContent={this.state.modal.modalContent} close={this.closeModal.bind(this)}/>:
-              null
-          }
-          {/* <Overview /> */}
-          <Related handleProductChange = {this.handleProductChange.bind(this)}/>
-          {/* <QuestionsAndAnswers /> */}
-          {
-            this.state.product?
-              <Reviews id={this.state.product.id}/>: null
-          }
-        </AppContext.Provider>
-      </React.Fragment>
+      <ThemeProvider theme={this.state.darkMode? darkTheme: lightTheme}>
+        <AppContainer>
+          <AppContext.Provider value={{openModal: this.openModal.bind(this),
+            characteristicsChart: this.state.product ? this.state.product.characteristics : null,
+            product: this.state.product ? this.state.product : null,
+            characterDescriptions: this.state.characterDescriptions}}>
+            {
+              (this.state.modal.modalShown && this.state.modal.modalContent)?
+                <Modal modalContent={this.state.modal.modalContent} close={this.closeModal.bind(this)}/>:
+                null
+            }
+            <button
+              className = 'clickMe'
+              style = {{
+                float: 'right'
+              }}
+              onClick={()=>{this.setState({darkMode: !this.state.darkMode})}}
+            >Change Theme</button>
+            {<Overview />}
+            <Related handleProductChange = {this.handleProductChange.bind(this)}/>
+            {<QuestionsAndAnswers />}
+            {
+              this.state.product?
+                <Reviews id={this.state.product.id}/>: null
+            }
+          </AppContext.Provider>
+        </AppContainer>
+      </ThemeProvider>
     );
   }
 }

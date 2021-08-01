@@ -1,7 +1,5 @@
 body {
   margin: 0;
-  font-family: 'Press Start 2P', cursive;
-  background-image: linear-gradient(#d4ead273, #b8b8b96e), url('../bgTile.png');
 }
 
 .clickMe:hover {
@@ -15,11 +13,17 @@ body {
 }
 
 button {
-  background: transparent;
   border: 2px solid rgb(64, 160, 0);
   padding: 5px 10px;
+  margin: .5rem 1rem .5rem 0;
 }
 
+input,
+select,
+button {
+  color: inherit;
+  background: inherit;
+}
 
 /* OVERVIEW */
 #overview {
