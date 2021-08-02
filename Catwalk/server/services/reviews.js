@@ -55,12 +55,12 @@ module.exports = {
       characteristics: req.body.characteristics
     };
     axios.post(`${apiUrl}/reviews`, params)
-      .then(() => {
-        res.send(res.statusCode);
+      .then((result) => {
+        res.send(result.statusText);
       })
       .catch(err => {
         console.error(err);
-        res.end();
+        res.send(err);
       });
   },
   markAsHelpful: (req, res) => {

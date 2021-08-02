@@ -23,7 +23,7 @@ const ReviewList = ({reviews, recommended, sortHandler, moreReviewsHandler}) => 
         }
       }>More Reviews</button>
       <AppContext.Consumer>
-        {(value) => <button className='clickMe' style={{fontFamily: 'inherit'}} onClick={()=>value.openModal(<ReviewForm/>)}>Add A Review +</button>}
+        {(value) => <button className='clickMe' style={{fontFamily: 'inherit'}} onClick={()=>value.openModal(<ReviewForm id={reviews.product}/>)}>Add A Review +</button>}
       </AppContext.Consumer>
 
     </div>

@@ -20,6 +20,7 @@ class Reviews extends React.Component {
   moreReviewsHandler(e){
     this.setState({page: ++this.state.page},
       this.getReviews(result => {
+        console.log(result);
         let currReviews = Array.from(this.state.reviews.results);
         currReviews = currReviews.concat(result.results);
         if(result.results.length === 0) {
@@ -43,15 +44,16 @@ class Reviews extends React.Component {
   }
 
   sortReviewsHandler(sortOption) {
-    //once called duplicates are rendered
-    this.setState({reviews: null},
-      this.setState({page: 1},
-        this.setState({sort: sortOption}, ()=>{
-          this.getReviews(res=>{
-            console.log(res);
-            this.setState({reviews: res});
-          });
-        })));
+    this.setState(
+      {
+        sort: sortOption,
+        page: 1
+      }, ()=>{
+        this.getReviews(res=>{
+          console.log(res);
+          this.setState({reviews: res});
+        });
+      });
   }
 
   componentDidMount(){

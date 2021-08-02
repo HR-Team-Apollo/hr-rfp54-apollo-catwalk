@@ -1,5 +1,6 @@
 import React from 'react';
 import AppContext from '../../../../appContext.js';
+import axios from 'axios';
 
 import RatingInput from './ratingInput';
 import RecommendInput from './recommendInput';
@@ -14,14 +15,14 @@ class ReviewForm extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      product_id: this.props.product_id,
+      product_id: Number(this.props.id),
       rating: 0,
-      summary: null,
-      body: null,
-      recommend: null,
-      name: null,
-      email: null,
-      photos: null,
+      summary: '',
+      body: '',
+      recommend: true,
+      name: '',
+      email: '',
+      photos: [],
       characteristics: {}
     };
   }
@@ -49,43 +50,35 @@ class ReviewForm extends React.Component {
             <RatingInput stateRate={this.state.rating} stateUpdate={this.updateFormState.bind(this)}/>
             <RecommendInput stateUpdate={this.updateFormState.bind(this)}/>
             <CharacteristicsInput stateUpdate={this.updateFormState.bind(this)}/>
-            {/* FIXME: fix the characteristics state update
-            characteristics	object	Object of keys representing characteristic_id and values representing the review value for that characteristic. { "14": 5, "15": 5 //...}
-            */}
             <SummaryInput stateUpdate={this.updateFormState.bind(this)}/>
             <BodyInput stateUpdate={this.updateFormState.bind(this)}/>
             <PhotosInput stateUpdate={this.updateFormState.bind(this)}/>
             <EmailInput stateUpdate={this.updateFormState.bind(this)}/>
             <NameInput stateUpdate={this.updateFormState.bind(this)}/>
+
             <button type="submit" onClick={
-              (e)=>{
+              (e) => {
                 e.preventDefault();
-                fetch(
-                  'http://localhost:3001/api/reviews',
-                  {
-                    'method': 'POST',
-                    // 'headers': {
-                    //   'Content-Type': 'application/json'
-                    // },
-                    'data': JSON.stringify({
-                      'product_id': this.state.product_id,
-                      'rating': this.state.rating,
-                      'summary': this.state.summary,
-                      'body': this.state.body,
-                      'recommend': this.state.recommend,
-                      'photos': this.state.photos,
-                      'email': this.state.email,
-                      'name': this.state.name,
-                      'characteristics': this.state.characteristics
-                    }),
-                  })
-                  .then(res=>openModal(<p>Thank you for submitting your review</p>))
+                let data = {
+                  'product_id': this.state.product_id,
+                  'rating': this.state.rating,
+                  'summary': this.state.summary,
+                  'body': this.state.body,
+                  'recommend': this.state.recommend,
+                  'photos': this.state.photos,
+                  'email': this.state.email,
+                  'name': this.state.name,
+                  'characteristics': this.state.characteristics
+                };
+                console.log(data);
+                axios.post('http://localhost:3001/api/reviews', data)
+                  .then(res=>{{
+                    console.log(res);
+                    openModal(<p>Thank you for submitting your review</p>);
+                  }})
                   .catch(err=>console.log(err));
-              }
-            }
-            >
-          Submit
-            </button>
+              }}
+            >Submit</button>
           </form>
         )}
       </AppContext.Consumer>

@@ -12,7 +12,7 @@ const Modal = ({modalContent, close}) => (
   }}>
     <div className='modal' style={{
       margin: '3rem auto',
-      maxHeight: '90vh',
+      height: '80vh',
       width: '30rem',
       backgroundColor: 'inherit',
       padding: '2rem'
@@ -27,6 +27,7 @@ const Modal = ({modalContent, close}) => (
       </div>
       <div className='modal-body' style={{
         margin: '3rem auto',
+        height: '80%',
         overflowY: 'scroll'
       }}>
         {modalContent}
