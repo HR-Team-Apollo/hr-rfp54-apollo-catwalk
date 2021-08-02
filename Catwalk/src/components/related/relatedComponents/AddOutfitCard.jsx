@@ -1,13 +1,17 @@
 import React, {useState} from 'react';
 
-const AddOutfitCard = () => {
+const AddOutfitCard = ({id, addProductToOutfit}) => {
   let [isHover, setHover] = useState(false);
   let backColor = isHover ? 'rgb(205, 205, 205)' : 'rgb(227, 227, 227)';
 
   return (
-    <div onMouseEnter={() => setHover(true)} onMouseLeave={() => setHover(false)} style = {{flexBasis: '10.5em', margin: '0 1.4%', position: 'relative', backgroundColor: backColor, cursor: 'pointer', minWidth: '10.5em'}}>
-      <span style = {{position: 'relative', fontSize: '6em', fontWeight: '900', left: '32%', top: '12%'}}>+</span>
-      <h3 style = {{position: 'relative', fontSize: '1.7em', fontWeight: '900', textAlign: 'center', top: '10%'}}>Add to Outfit</h3>
+    <div onClick = {() => addProductToOutfit(id)} onMouseEnter={() => setHover(true)} onMouseLeave={() => setHover(false)} style = {{flexBasis: '11em', margin: '0 1.4%', position: 'relative', backgroundColor: backColor, cursor: 'pointer', minWidth: '14.2em'}}>
+      <div style = {{width: '100%', display: 'flex'}}>
+        <span style = {{fontSize: '6em', fontWeight: '900', flex: '1', textAlign: 'center', marginTop: '0.35em'}}>+</span>
+      </div>
+      <div style ={{display: 'flex'}}>
+        <h3 style = {{position: 'relative', fontSize: '1.7em', fontWeight: '900', textAlign: 'center', top: '10%'}}>Add to Outfit</h3>
+      </div>
     </div>
   );
 };

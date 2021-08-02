@@ -1,6 +1,7 @@
 import React from 'react';
 import ProductCard from './ProductCard.jsx';
 import axios from 'axios';
+import { AiFillCaretLeft, AiFillCaretRight } from 'react-icons/ai';
 
 // const ProductList = () => {
 //   let [relatedProducts, setRelatedProducts] = useState([]);
@@ -50,26 +51,34 @@ class ProductList extends React.Component {
     }
   }
 
-  // componentDidMount() {
-  //   axios.get('http://localhost:3001/api/products/17067/related')
-  //     .then(res => {
-  //       this.setState({
-  //         relatedProducts: res.data
-  //       });
-  //     })
-  //     .catch(err => {
-  //       console.log('failed to fetch data', err);
-  //     });
-  // }
+  componentDidMount() {
+    document.getElementById('productArrLeft').style.display = 'none';
+    document.getElementById('productArrRight').style.display = 'none';
+  }
 
   render() {
     return (
-      <div style = {{display: 'flex', justifyContent: 'flex-start'}}>
-        {
-          this.state.relatedProducts.map((prodId) => {
-            return <ProductCard handleProductChange = {this.props.handleProductChange} key = {prodId} isStar = {true} id = {prodId} />;
-          })
-        }
+      <div style={{position: 'relative'}}>
+        <div id = 'productArrLeft' onClick = {() => {
+          let slider = document.getElementById('productListSlider');
+          slider.scrollLeft -= slider.scrollWidth / 4.6;
+          console.log(slider.scrollLeft);
+        }}  style={{fontSize: '6em', position: 'absolute', top: '0.85em', left: '0', zIndex: '10', cursor: 'pointer'}}>
+          <AiFillCaretLeft />
+        </div>
+        <div id = 'productListSlider' style = {{display: 'flex', justifyContent: 'flex-start', width: '90%', overflow: 'hidden', paddingLeft: '3em'}}>
+          {
+            this.state.relatedProducts.map((prodId) => {
+              return <ProductCard removeOutfit = {null} handleProductChange = {this.props.handleProductChange} key = {prodId} isStar = {true} id = {prodId} />;
+            })
+          }
+        </div>
+        <div id = 'productArrRight' onClick = {() => {
+          let slider = document.getElementById('productListSlider');
+          slider.scrollLeft += slider.scrollWidth / 4.6;
+        }} style={{fontSize: '6em', position: 'absolute', top: '0.85em', right: '2.7%', zIndex: '10', cursor: 'pointer'}}>
+          <AiFillCaretRight />
+        </div>
       </div>
     );
   }
