@@ -13,7 +13,7 @@ const Modal = ({modalContent, close}) => (
     <div className='modal' style={{
       margin: '3rem auto',
       height: '80vh',
-      minWidth: '30rem',
+      width: 'fit-content',
       maxWidth: '90vw',
       backgroundColor: 'inherit',
       padding: '2rem'

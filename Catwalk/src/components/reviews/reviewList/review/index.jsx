@@ -37,7 +37,7 @@ const Review = ({review, openModal}) => (
                 height: '5rem'
               }}
               src={photoData.url}
-              onClick={(e)=>openModal(<img style={{margin: '0 auto', display: 'block'}} src={e.target.src}/>)}
+              onClick={(e)=>openModal(<img style={{margin: '0 auto', display: 'block', overflowX:'scroll'}} src={e.target.src}/>)}
             />);
           })
         }

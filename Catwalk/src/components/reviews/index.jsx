@@ -32,6 +32,7 @@ class Reviews extends React.Component {
   }
 
   getReviews(next) {
+    console.log('[getReviews state]' ,this.state);
     fetch(`http://localhost:3001/api/reviews/reviewPage/${this.state.id}/${this.state.page}/${this.state.count}/${this.state.sort}`, {
       method: 'GET'
     })

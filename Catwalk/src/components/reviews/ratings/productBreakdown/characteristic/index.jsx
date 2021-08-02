@@ -17,7 +17,8 @@ const Characteristic = ({characteristic, name}) => {
             <span style={{
               position: 'absolute',
               top: '-.5rem',
-              left: `${(characteristic.value/5)*100}%`,
+              //FIXME: shift icon over to right .5rem
+              left: `${(characteristic.value/6)*100}%`,
               WebkitBackgroundClip: 'text',
               backgroundColor: 'rgb(64, 160, 0)',
               WebkitTextFillColor: 'transparent'
