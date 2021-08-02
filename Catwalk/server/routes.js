@@ -30,5 +30,9 @@ router.put('/reviews/:review_id/report', reviews.reportReview);
 
 router.get('/reviews/chars', reviews.getReviewAndChars);
 
+router.post('/write', products.writeRelatedProducts);
+
+router.get('/read', products.readRelatedProducts);
+
 
 module.exports = router;

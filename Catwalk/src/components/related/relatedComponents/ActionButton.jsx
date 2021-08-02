@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import AppContext from '../../../appContext.js';
 import CompareModal from './CompareModal.jsx';
 
-const ActionButton = ({isStar, chars}) => {
+const ActionButton = ({isStar, chars, removeOutfit}) => {
 
   let [isHover, setHover] = useState(false);
 
@@ -19,7 +19,7 @@ const ActionButton = ({isStar, chars}) => {
     );
   } else {
     return (
-      <div style = {{position: 'absolute', right: '0.5em', top: '0.5em', color: 'red', fontFamily: 'arial', cursor: 'pointer'}}>
+      <div onClick = {() => removeOutfit(chars)} style = {{position: 'absolute', right: '0.5em', top: '0.5em', color: 'red', fontFamily: 'arial', cursor: 'pointer'}}>
         <span>X</span>
       </div>
     );
