@@ -7,7 +7,16 @@ axios.defaults.headers.common['Authorization'] = API_KEY;
 
 module.exports = {
   getAllReviews: (req, res) => {
-    axios.get(`${apiUrl}/reviews`, {params: {count: req.query.count ? req.query.count : 2, page: req.query.page ? req.query.page : 1, sort: req.query.sort ? req.query.sort : 'relevant', product_id: req.query.product_id ? req.query.product_id : '17067'}})
+    axios.get(`${apiUrl}/reviews`, {
+      params: {
+        count: req.query.count ?
+          req.query.count : 2,
+        page: req.query.page ?
+          req.query.page : 1, sort:
+        req.query.sort ?
+          req.query.sort : 'relevant',
+        product_id: req.query.product_id ?
+          req.query.product_id : '17067'}})
       .then(resp => {
         res.send(resp.data);
       })
@@ -15,6 +24,13 @@ module.exports = {
         console.error(err);
         res.end();
       });
+  },
+  getReviewPage: (req, res)=>{
+    axios.get(`${apiUrl}/reviews`, {params: {count: req.params.count ? req.params.count : 2, page: req.params.page ? req.params.page : 1, sort: req.params.sort ? req.params.sort : 'relevant', product_id: req.params.product_id ? req.params.product_id : '17067'}})
+      .then(results=>{
+        res.send(results.data);
+      })
+      .catch(err=>res.send(err));
   },
   getAllReviewsMeta: (req, res) => {
     axios.get(`${apiUrl}/reviews/meta`, {params: {product_id: req.params.product_id}})
@@ -39,18 +55,18 @@ module.exports = {
       characteristics: req.body.characteristics
     };
     axios.post(`${apiUrl}/reviews`, params)
-      .then(() => {
-        res.send(res.statusCode);
+      .then((result) => {
+        res.send(result.statusText);
       })
       .catch(err => {
         console.error(err);
-        res.end();
+        res.send(err);
       });
   },
   markAsHelpful: (req, res) => {
     axios.put(`${apiUrl}/reviews/${req.params.review_id}/helpful`)
       .then(() => {
-        res.send(res.statusCode);
+        res.sendStatus(res.statusCode);
       })
       .catch(err => {
         console.error(err);
@@ -60,7 +76,7 @@ module.exports = {
   reportReview: (req, res) => {
     axios.put(`${apiUrl}/reviews/${req.params.review_id}/report`)
       .then(() => {
-        res.send(res.statusCode);
+        res.sendStatus(res.statusCode);
       })
       .catch(err => {
         console.error(err);

@@ -4,25 +4,21 @@ const Modal = ({modalContent, close}) => (
   <div style={{
     margin: '0',
     position: 'fixed',
+    top: '0',
     backgroundColor: '#000000e0',
     width: '100vw',
     height: '100vh',
     zIndex: '998'
   }}>
     <div className='modal' style={{
-      minHeight: '30rem',
-      maxHeight: '90vh',
-      overflow: 'scroll',
+      margin: '3rem auto',
+      height: '80vh',
       width: '30rem',
-      backgroundColor: '#fff',
-      position: 'absolute',
-      top: '50%',
-      left: '50%',
-      transform: 'translate(-50%,-50%)',
+      backgroundColor: 'inherit',
       padding: '2rem'
     }}>
       <div className='modal-header'>
-        <button  onClick={close} style={{
+        <button  className='clickMe' onClick={close} style={{
           float: 'right',
           backgroundColor: 'transparent',
           border: 'none',
@@ -30,7 +26,9 @@ const Modal = ({modalContent, close}) => (
         }}><i className='fa fa-times'></i></button>
       </div>
       <div className='modal-body' style={{
-        margin: '3rem auto'
+        margin: '3rem auto',
+        height: '80%',
+        overflowY: 'scroll'
       }}>
         {modalContent}
       </div>

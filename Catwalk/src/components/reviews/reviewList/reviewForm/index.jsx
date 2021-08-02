@@ -1,115 +1,87 @@
 import React from 'react';
+import AppContext from '../../../../appContext.js';
+import axios from 'axios';
+
 import RatingInput from './ratingInput';
-import RecommendationsInput from './recommendationsInput';
+import RecommendInput from './recommendInput';
 import CharacteristicsInput from './characteristicsInput';
 import SummaryInput from './summaryInput';
-
-
-const mockProps = {
-  product_id: '1',
-  product_name: 'Master Sword',
-  characteristics: ['Size','Width','Comfort']
-};
+import BodyInput from './bodyInput';
+import PhotosInput from './photosInput';
+import EmailInput from './emailInput';
+import NameInput from './nameInput';
 
 class ReviewForm extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      product_id: Number(this.props.id),
       rating: 0,
-      recommendations: null,
-      characteristics: {},
-      summary: null
+      summary: '',
+      body: '',
+      recommend: true,
+      name: '',
+      email: '',
+      photos: [],
+      characteristics: {}
     };
   }
 
   updateFormState(key,value){
-    this.setState({[key]: value});
+    if (typeof value === 'object') {
+      let newState = this.state[key];
+      let valKeys = Object.keys(value);
+      valKeys.forEach(k=>{
+        newState[k] = value[k];
+      });
+      this.setState({characteristics: newState});
+    } else {
+      this.setState({[key]: value});
+    }
   }
 
   render(){
     return (
-      <form id="review-form">
-        <h3 className="form-title">Write Your Review</h3>
-        <h4 className="form-subtitle">{`About the ${mockProps.product_name}`}</h4>
+      <AppContext.Consumer>
+        {({product, openModal}) =>(
+          <form id="review-form">
+            <h3 className="form-title">Write Your Review</h3>
+            <h4 className="form-subtitle">{`About the ${product.name}`}</h4>
+            <RatingInput stateRate={this.state.rating} stateUpdate={this.updateFormState.bind(this)}/>
+            <RecommendInput stateUpdate={this.updateFormState.bind(this)}/>
+            <CharacteristicsInput stateUpdate={this.updateFormState.bind(this)}/>
+            <SummaryInput stateUpdate={this.updateFormState.bind(this)}/>
+            <BodyInput stateUpdate={this.updateFormState.bind(this)}/>
+            <PhotosInput stateUpdate={this.updateFormState.bind(this)}/>
+            <EmailInput stateUpdate={this.updateFormState.bind(this)}/>
+            <NameInput stateUpdate={this.updateFormState.bind(this)}/>
 
-        <RatingInput stateRate={this.state.rating} stateUpdate={this.updateFormState.bind(this)}/>
-        <RecommendationsInput stateUpdate={this.updateFormState.bind(this)}/>
-        <CharacteristicsInput stateUpdate={this.updateFormState.bind(this)}/>
-        {/* fix the characteristics state update */}
-        <SummaryInput/>
-
-        {/* <div className="review-form-section">
-          <label htmlFor="body">body: </label>
-          <input
-            type="textarea"
-            name="body"
-            id="body"
-            placeholder="Why did you like this product or not?"
-            maxLength="1000"
-            minLength="50"
-            required
-            onChange={
-              (e)=>{
-                e.target.value.length <= e.target.minLength?
-                  document.getElementById('charCount').innerText = (e.target.minLength - e.target.value.length):
-
-              }
-            }
-          />
-          <p id="minimum">
-            Minimum required characters left:{' '}
-            <span id="charCount">50</span>
-          </p>
-          <p id="minReached">Minimum reached</p>
-        </div>
-         */}
-        <div className="review-form-section">
-          {/* A button will appear allowing users to upload their photos to the form.
-            Clicking the button should open a separate window where the photo to be can be selected.
-            After the first image is uploaded, a thumbnail showing the image should appear.  A user should be able to add up to five images before the button to add disappears, preventing further additions.
-            */}
-          <label htmlFor="photos">Upload photos: </label>
-          <input
-            type="file"
-            name="photos"
-            id="photos"
-            accept="image/png, image/jpeg"
-          />
-        </div>
-        <div className="review-form-section">
-          <label htmlFor="email">Enter your email: </label>
-          <input
-            type="email"
-            name="email"
-            id="email"
-            placeholder="Example: jackson11@email.com"
-            required
-          />
-          <p>For authentication reasons, you will not be emailed</p>
-        </div>
-        <div className="review-form-section">
-          <label htmlFor="name">What is your nickname? </label>
-          <input
-            type="text"
-            name="name"
-            id="name"
-            placeholder="Example: jackson11!"
-            maxLength="60"
-            required
-          />
-          <p>For privacy reasons, do not use your full name or email address</p>
-        </div>
-        <button type="submit">
-          {/* Upon selecting this button the form’s inputs should be validated.   If there are any invalid entries, the submission should be prevented, and a warning message will appear.   This message should be titled “You must enter the following:”
-          This error will occur if:
-          Any mandatory fields are blank
-          The review body is less than 50 characters
-          The email address provided is not in correct email format
-          The images selected are invalid or unable to be uploaded.
-          */}
-          Submit
-        </button>
-      </form>
+            <button type="submit" onClick={
+              (e) => {
+                e.preventDefault();
+                let data = {
+                  'product_id': this.state.product_id,
+                  'rating': this.state.rating,
+                  'summary': this.state.summary,
+                  'body': this.state.body,
+                  'recommend': this.state.recommend,
+                  'photos': this.state.photos,
+                  'email': this.state.email,
+                  'name': this.state.name,
+                  'characteristics': this.state.characteristics
+                };
+                console.log(data);
+                axios.post('http://localhost:3001/api/reviews', data)
+                  .then(res=>{{
+                    console.log(res);
+                    openModal(<p>Thank you for submitting your review</p>);
+                  }})
+                  .catch(err=>console.log(err));
+              }}
+            >Submit</button>
+          </form>
+        )}
+      </AppContext.Consumer>
     );
   }
 }
@@ -123,6 +95,6 @@ class ReviewForm extends React.Component {
 // name	text	Username for question asker
 // email	text	Email address for question asker
 // photos	[text]	Array of text urls that link to images to be shown
-// characteristics	object	Object of keys representing characteristic_id and values representing the review value for that characteristic. { "14": 5, "15": 5 //...}
+
 
 export default ReviewForm;
