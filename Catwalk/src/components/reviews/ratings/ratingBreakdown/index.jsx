@@ -48,7 +48,7 @@ class RatingBreakdown extends React.Component {
           <Stars rating={this.state.avgRatings}/>
         </div>
 
-        <div style={{fontSize:'.5rem'}}>
+        <div style={{fontSize:'.75rem'}}>
           <span className='recommendations'>
             {this.calcPercentage(this.props.recommendations['true'], Number(this.state.totalRecommends))}
           </span>

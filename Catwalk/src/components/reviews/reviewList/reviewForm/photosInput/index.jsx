@@ -9,18 +9,24 @@ const PhotosInput = ({stateUpdate}) => (
       TODO: CREATE A BUTTON THAT ADDS ANOTHER INPUT FIELD.
       CORRELATE THE INDEX OF THIS ELEMENT WITH THE POSITION IN THE ARRAY
       */}
-    <label htmlFor="photos">Enter a photo url: </label>
-    <input
-      type="url"
-      name="photos"
-      placeholder="https://example.com"
-      pattern="https://.*"
-      onChange={
-        (e)=>{
-          stateUpdate('photos', e.target.files);
+    <label htmlFor="photos">Photos: </label>
+    <button onClick={
+      //append this input
+      <input
+        type="url"
+        name="photos"
+        placeholder="https://example.com"
+        style={{display:'block'}}
+        pattern="https://.*"
+        onChange={
+          (e)=>{
+            if(e.target.value){
+              stateUpdate('photos', e.target.value);
+            }
+          }
         }
-      }
-      required></input>
+        required></input>
+    }>Add Photo</button>
   </div>
 );
 
