@@ -19,7 +19,8 @@ class ProductList extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      relatedProducts: []
+      relatedProducts: [],
+      slice: 4
     };
   }
 
@@ -52,30 +53,31 @@ class ProductList extends React.Component {
   }
 
   componentDidMount() {
-    document.getElementById('productArrLeft').style.display = 'none';
-    document.getElementById('productArrRight').style.display = 'none';
+    // document.getElementById('productArrLeft').style.display = 'none';
+    // document.getElementById('productArrRight').style.display = 'none';
   }
 
   render() {
     return (
-      <div style={{position: 'relative'}}>
+      <div style={{position: 'relative', borderBottom: '1px solid black', paddingBottom: '2.6em'}}>
         <div id = 'productArrLeft' onClick = {() => {
-          let slider = document.getElementById('productListSlider');
-          slider.scrollLeft -= slider.scrollWidth / 4.6;
-          console.log(slider.scrollLeft);
+          if (!(this.state.slice <= 4)) {
+            this.setState({slice: this.state.slice - 1});
+          }
         }}  style={{fontSize: '6em', position: 'absolute', top: '0.85em', left: '0', zIndex: '10', cursor: 'pointer'}}>
           <AiFillCaretLeft />
         </div>
-        <div id = 'productListSlider' style = {{display: 'flex', justifyContent: 'flex-start', width: '90%', overflow: 'hidden', paddingLeft: '3em'}}>
+        <div id = 'productListSlider' style = {{display: 'flex', justifyContent: 'center', width: '90%', overflow: 'hidden', paddingLeft: '3em'}}>
           {
-            this.state.relatedProducts.map((prodId) => {
+            this.state.relatedProducts.slice(this.state.slice - 4, this.state.slice).map((prodId) => {
               return <ProductCard removeOutfit = {null} handleProductChange = {this.props.handleProductChange} key = {prodId} isStar = {true} id = {prodId} />;
             })
           }
         </div>
         <div id = 'productArrRight' onClick = {() => {
-          let slider = document.getElementById('productListSlider');
-          slider.scrollLeft += slider.scrollWidth / 4.6;
+          if (!(this.state.slice >= this.state.relatedProducts.length - 1)) {
+            this.setState({slice: this.state.slice + 1});
+          }
         }} style={{fontSize: '6em', position: 'absolute', top: '0.85em', right: '2.7%', zIndex: '10', cursor: 'pointer'}}>
           <AiFillCaretRight />
         </div>

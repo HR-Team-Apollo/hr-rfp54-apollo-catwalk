@@ -6,6 +6,9 @@ import { AiFillCaretLeft, AiFillCaretRight } from 'react-icons/ai';
 
 const YourOutfitList = ({id, handleProductChange}) => {
   let [outfitProducts, setOutfitProducts] = useState([]);
+  let [slice, setSlice] = useState(4);
+  let [arrLeftVisible, setArrLeftVisible] = useState(true);
+  let [arrRightVisible, setArrRightVisible] = useState(true);
 
   useEffect(() => {
     axios.get('http://localhost:3001/api/read')
@@ -14,9 +17,9 @@ const YourOutfitList = ({id, handleProductChange}) => {
       });
   }, []);
 
-  useEffect(() => {
-    document.getElementById('outfitArrLeft').style.display = 'none';
-  }, []);
+  // useEffect(() => {
+  //   document.getElementById('outfitArrLeft').style.display = 'none';
+  // }, []);
 
   const addProductToOutfit = (id) => {
     let newProducts = outfitProducts.slice();
@@ -59,35 +62,26 @@ const YourOutfitList = ({id, handleProductChange}) => {
   };
 
   return (
-    <div style={{position: 'relative'}}>
+    <div style={{position: 'relative', borderBottom: '1px solid black', paddingBottom: '2.6em'}}>
       <div id = 'outfitArrLeft'  onClick = {(e) => {
-        let slider = document.getElementById('yourOutfitSlider');
-        slider.scrollLeft -= slider.scrollWidth / 4.6;
-        console.log(slider.scrollLeft);
-        if (slider.scrollLeft <= 0) {
-          console.log('this is true');
-          e.target.style.display = 'none';
+        if (!(slice <= 4)) {
+          setSlice(slice - 1);
         }
-        document.getElementById('outfitArrRight').style.display = 'inline-block';
       }}  style={{fontSize: '6em', position: 'absolute', top: '0.85em', left: '0', zIndex: '10', cursor: 'pointer'}}>
         <AiFillCaretLeft />
       </div>
-      <div id = 'yourOutfitSlider' style = {{display: 'flex', justifyContent: 'flex-start', width: '90%', overflow: 'hidden', paddingLeft: '3em'}}>
+      <div id = 'yourOutfitSlider' style = {{display: 'flex', justifyContent: 'center', width: '90%', overflow: 'hidden', paddingLeft: '3em'}}>
         {
-          outfitProducts.map((prodId) => {
+          outfitProducts.slice(slice - 4, slice).map((prodId) => {
             return <ProductCard handleProductChange = {handleProductChange} removeOutfit = {removeOutfit} isStar = {false} key = {prodId} id = {prodId}/>;
           })
         }
         <AddOutfitCard id = {id} addProductToOutfit = {addProductToOutfit}/>
       </div>
       <div id = 'outfitArrRight' onClick = {(e) => {
-        let slider = document.getElementById('yourOutfitSlider');
-        slider.scrollLeft += slider.scrollWidth / 4.6;
-        console.log(slider.scrollLeft + slider.clientWidth);
-        if (slider.scrollLeft + slider.clientWidth >= slider.scrollWidth) {
-          e.target.style.display = 'none';
+        if (!(slice >= outfitProducts.length - 1)) {
+          setSlice(slice + 1);
         }
-        document.getElementById('outfitArrLeft').style.display = 'inline-block';
       }} style={{fontSize: '6em', position: 'absolute', top: '0.85em', right: '2.7%', zIndex: '10', cursor: 'pointer'}}>
         <AiFillCaretRight />
       </div>
