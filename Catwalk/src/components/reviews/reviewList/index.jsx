@@ -4,9 +4,9 @@ import Review from './review';
 import AppContext from '../../../appContext.js';
 import ReviewForm from './reviewForm';
 
-const ReviewList = ({reviews, recommended}) => (
+const ReviewList = ({reviews, recommended, sortHandler, moreReviewsHandler}) => (
   <div className="reviewList">
-    <Sorting recommended={recommended}/>
+    <Sorting recommended={recommended} clickHandler={sortHandler}/>
     <ul style={{
       padding: '0'
     }}>
@@ -17,14 +17,13 @@ const ReviewList = ({reviews, recommended}) => (
       }
     </ul>
     <div>
-      <button onClick={
-        ()=>{
-          // TODO: make an API call to get more reviews to render
-          alert('More reviews coming to a store near you!');
+      <button className='clickMe' style={{fontFamily: 'inherit'}} onClick={
+        (e)=>{
+          moreReviewsHandler(e);
         }
       }>More Reviews</button>
       <AppContext.Consumer>
-        {(value) => <button onClick={()=>value.openModal(<ReviewForm/>)}>Add A Review +</button>}
+        {(value) => <button className='clickMe' style={{fontFamily: 'inherit'}} onClick={()=>value.openModal(<ReviewForm id={reviews.product}/>)}>Add A Review +</button>}
       </AppContext.Consumer>
 
     </div>

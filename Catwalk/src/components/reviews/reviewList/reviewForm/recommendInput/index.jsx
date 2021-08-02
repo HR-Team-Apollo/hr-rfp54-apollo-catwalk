@@ -1,6 +1,6 @@
 import React from 'react';
 
-const recommendationsInput = ({stateUpdate}) => (
+const recommendInput = ({stateUpdate}) => (
   <div className="review-form-section recommendations">
     <label htmlFor="recommend">Do you recommend this product? </label>
     <input
@@ -20,11 +20,11 @@ const recommendationsInput = ({stateUpdate}) => (
       name="recommend"
       value="false"
       onClick={()=>{
-        stateUpdate('recommendations', false);
+        stateUpdate('recommend', false);
       }}
     ></input>
     <label htmlFor="recommend">No</label>
   </div>
 );
 
-export default recommendationsInput;
+export default recommendInput;

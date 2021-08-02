@@ -1,6 +1,7 @@
 import React from 'react';
 import Stars from '../../../../utils/stars';
 import moment from 'moment';
+import ReviewBody from './reviewBody';
 
 const Review = ({review}) => (
   <div className='review' style={{
@@ -16,8 +17,17 @@ const Review = ({review}) => (
     </div>
 
     <div className='review-body'>
-      <div className='summary' style={{overflow: 'hidden', textOverflow: 'ellipsis', fontWeight: 'bold'}}>{review.summary}</div>
-      <div className='body'>{review.body}</div>
+      <div className='summary' style={{overflow: 'hidden', textOverflow: 'ellipsis', fontWeight: 'bold'}}>
+        {review.summary}
+      </div>
+
+      {review.recommend?
+        <div className='review-recommend'>
+          <i className="fa fa-check"></i>
+          I recommend this product</div>:
+        null
+      }
+      <ReviewBody text={review.body}/>
       {
         review.response?
           <div className='response' style={{background: 'lightgrey'}}>
@@ -31,12 +41,36 @@ const Review = ({review}) => (
 
     <div className='review-footer' style={{margin: '1rem 0'}}>
       Helpful?
-      <span style={{margin: '0 2rem'}} onClick={()=>{
-        console.log('helpfulness++')}}>
-        Yes({review.helpfulness})
+      <span style={{margin: '0 2rem'}}>
+        Yes(<span className='clickMe'  data-clicked='false' onClick={(e)=>{
+          if(e.target.dataset.clicked==='false'){
+            fetch(`http://localhost:3001/api/reviews/${review.review_id}/helpful`, {
+              method: 'PUT'
+            })
+              .then(response => response)
+              .then(result => {
+                let helpNum = Number(e.target.innerText);
+                e.target.innerText= helpNum + 1;
+                e.target.dataset.clicked='true';
+              })
+              .catch(error => {
+                console.error('Error:', error);
+              });}
+        }} >{review.helpfulness}</span>)
       </span>
-      <span onClick={()=>{
-        console.log('Report!');
+      <span className='clickMe' onClick={(e)=>{
+        if(e.target.innerText === 'Report') {
+          fetch(`http://localhost:3001/api/reviews/${review.review_id}/report`, {
+            method: 'PUT'
+          })
+            .then(response => response)
+            .then(result => {
+              e.target.innerText='Reported';
+            })
+            .catch(error => {
+              console.error('Error:', error);
+            });
+        }
       }}>
         Report
       </span>
