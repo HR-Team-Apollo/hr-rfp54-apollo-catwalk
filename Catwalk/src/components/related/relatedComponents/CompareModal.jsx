@@ -72,7 +72,7 @@ const CompareModal = ({compareChars}) => {
     <AppContext.Consumer>
       {
         ({characteristicsChart, product}) => (
-          <div>
+          <div style = {{width: '27rem'}}>
             <h4 style = {{textAlign: 'center'}}>Comparing</h4>
             <div style={{display: 'flex', justifyContent: 'space-between'}}>
               <h5 style = {{display: 'inline', margin: '0 0 0 0', flex: '1'}}>{product.name}</h5>
