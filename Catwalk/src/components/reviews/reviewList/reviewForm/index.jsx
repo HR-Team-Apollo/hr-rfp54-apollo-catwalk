@@ -35,6 +35,10 @@ class ReviewForm extends React.Component {
         newState[k] = value[k];
       });
       this.setState({characteristics: newState});
+    } else if (key === 'photos'){
+      let currPhotos = this.state.photos;
+      currPhotos.concat(value);
+      this.setState({photos: currPhotos});
     } else {
       this.setState({[key]: value});
     }
@@ -44,7 +48,7 @@ class ReviewForm extends React.Component {
     return (
       <AppContext.Consumer>
         {({product, openModal}) =>(
-          <form id="review-form">
+          <form id="review-form" style={{maxWidth: '40rem'}}>
             <h3 className="form-title">Write Your Review</h3>
             <h4 className="form-subtitle">{`About the ${product.name}`}</h4>
             <RatingInput stateRate={this.state.rating} stateUpdate={this.updateFormState.bind(this)}/>
@@ -56,11 +60,11 @@ class ReviewForm extends React.Component {
             <EmailInput stateUpdate={this.updateFormState.bind(this)}/>
             <NameInput stateUpdate={this.updateFormState.bind(this)}/>
 
-            <button type="submit" onClick={
+            <button type="submit" className='clickMe' onClick={
               (e) => {
                 e.preventDefault();
                 let data = {
-                  'product_id': this.state.product_id,
+                  'product_id': Number(this.state.product_id),
                   'rating': this.state.rating,
                   'summary': this.state.summary,
                   'body': this.state.body,
@@ -73,8 +77,12 @@ class ReviewForm extends React.Component {
                 console.log(data);
                 axios.post('http://localhost:3001/api/reviews', data)
                   .then(res=>{{
-                    console.log(res);
-                    openModal(<p>Thank you for submitting your review</p>);
+                    console.log(res.data);
+                    if(res.data === 'Created'){
+                      openModal(<p>Thank you for submitting your review</p>);
+                    }else{
+                      alert('something went wrong');
+                    }
                   }})
                   .catch(err=>console.log(err));
               }}

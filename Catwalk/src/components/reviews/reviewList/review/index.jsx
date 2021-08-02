@@ -3,7 +3,7 @@ import Stars from '../../../../utils/stars';
 import moment from 'moment';
 import ReviewBody from './reviewBody';
 
-const Review = ({review}) => (
+const Review = ({review, openModal}) => (
   <div className='review' style={{
     display: 'block',
     maxWidth: '35rem',
@@ -28,6 +28,20 @@ const Review = ({review}) => (
         null
       }
       <ReviewBody text={review.body}/>
+      <div className='review-photos' style={{display: 'flex', justifyContent: 'space-evenly'}}>
+        {
+          review.photos.map(photoData=>{
+            return(<img
+              key={photoData.id}
+              style={{
+                height: '5rem'
+              }}
+              src={photoData.url}
+              onClick={(e)=>openModal(<img style={{margin: '0 auto', display: 'block', overflowX:'scroll'}} src={e.target.src}/>)}
+            />);
+          })
+        }
+      </div>
       {
         review.response?
           <div className='response' style={{background: 'lightgrey'}}>

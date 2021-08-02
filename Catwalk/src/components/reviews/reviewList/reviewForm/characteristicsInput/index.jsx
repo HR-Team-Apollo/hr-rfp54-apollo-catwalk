@@ -16,10 +16,9 @@ const CharacteristicsInput = ({stateUpdate}) => (
                   <input type='radio' name={ch} value={j + 1} key={j} onClick={
                     (e)=>{
                       let charObj = {};
-                      charObj[product.characteristics[ch].id] = j + 1;
+                      charObj[`${product.characteristics[ch].id}`] = j + 1;
                       const selectionTextEl = e.target.parentElement.previousSibling;
                       selectionTextEl.innerText = choice;
-                      // FIXME: only replaces current state with the object below, doesn't add
                       stateUpdate('characteristics', charObj);
                       stateUpdate('product_id',product['product_id']);
                     }
