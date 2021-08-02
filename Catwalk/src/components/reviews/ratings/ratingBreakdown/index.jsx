@@ -66,8 +66,7 @@ class RatingBreakdown extends React.Component {
                 className='clickMe'
                 style={{textDecoration:'underline'}}
                 onClick={()=>{
-                  //TODO: filters results to only show selected
-                  alert(`show reviews with ${rating[0]} stars`);
+                  this.props.filter(rating[0]);
                 }}>{rating[0]} stars</span>
               <StarBar starPercentage={this.calcPercentage(rating[1],this.state.totalRatings)}/>
               <span>{rating[1]}</span>
