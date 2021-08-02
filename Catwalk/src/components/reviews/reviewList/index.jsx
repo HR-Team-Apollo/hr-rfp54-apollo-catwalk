@@ -4,16 +4,20 @@ import Review from './review';
 import AppContext from '../../../appContext.js';
 import ReviewForm from './reviewForm';
 
-const ReviewList = ({reviews, recommended, sortHandler, moreReviewsHandler}) => (
+const ReviewList = ({reviews, starFilter, recommended, sortHandler, moreReviewsHandler}) => (
   <div className="reviewList">
     <Sorting recommended={recommended} clickHandler={sortHandler}/>
     <ul style={{
-      padding: '0'
+      padding: '0',
+      maxHeight: '80vh',
+      overflowY: 'scroll'
     }}>
       {
-        reviews.results.map(review=>{
-          return (<Review review={review} key={review.review_id}/>);
-        })
+        reviews.results.map(review=>(
+          starFilter.includes(review.rating)?
+            <Review review={review} key={review.review_id}/>:
+            null
+        ))
       }
     </ul>
     <div>

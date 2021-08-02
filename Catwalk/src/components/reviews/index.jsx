@@ -13,7 +13,8 @@ class Reviews extends React.Component {
       sort: 'relevant',
       page: 1,
       count: 2,
-      id: this.props.id
+      id: this.props.id,
+      starFilter: [1, 2, 3, 4, 5]
     };
   }
 
@@ -60,7 +61,7 @@ class Reviews extends React.Component {
     this.getReviews((res)=>{
       this.setState({reviews: res});
     });
-    //refactor code to pull from app state instead of this redundant server call
+    //TODO: refactor code to pull from app state instead of this redundant server call
     fetch(`http://localhost:3001/api/reviews/meta/${this.state.id}`, {
       method: 'GET'
     })
@@ -73,14 +74,33 @@ class Reviews extends React.Component {
       });
   }
 
+  filterByStars(star) {
+    debugger;
+    star = Number(star);
+    let starsShown = this.state.starFilter;
+    const index = starsShown.indexOf(star);
+    if (index === -1) {
+      starsShown.push(star);
+    } else {
+      starsShown.splice(index, 1);
+    }
+    this.setState({starFilter: starsShown});
+  }
+
   render(){
     return (
       <div className="reviews container">
         <h2>Ratings &amp; Reviews</h2>
         <div style={{display: 'flex'}}>
-          {this.state.meta? <Ratings ratings={this.state.meta}/>: null}
+          {this.state.meta? <Ratings filter={this.filterByStars.bind(this)} ratings={this.state.meta}/>: null}
           {this.state.reviews && this.state.meta?
-            <ReviewList sortHandler={this.sortReviewsHandler.bind(this)} moreReviewsHandler={this.moreReviewsHandler.bind(this)} reviews={this.state.reviews} recommended={this.state.meta.recommended} />:
+            <ReviewList
+              starFilter={this.state.starFilter}
+              sortHandler={this.sortReviewsHandler.bind(this)}
+              moreReviewsHandler={this.moreReviewsHandler.bind(this)}
+              reviews={this.state.reviews}
+              recommended={this.state.meta.recommended}
+            />:
             null}
         </div>
       </div>

@@ -60,7 +60,7 @@ class ReviewForm extends React.Component {
               (e) => {
                 e.preventDefault();
                 let data = {
-                  'product_id': this.state.product_id,
+                  'product_id': Number(this.state.product_id),
                   'rating': this.state.rating,
                   'summary': this.state.summary,
                   'body': this.state.body,
@@ -73,8 +73,12 @@ class ReviewForm extends React.Component {
                 console.log(data);
                 axios.post('http://localhost:3001/api/reviews', data)
                   .then(res=>{{
-                    console.log(res);
-                    openModal(<p>Thank you for submitting your review</p>);
+                    console.log(res.data);
+                    if(res.data === 'Created'){
+                      openModal(<p>Thank you for submitting your review</p>);
+                    }else{
+                      alert('something went wrong');
+                    }
                   }})
                   .catch(err=>console.log(err));
               }}
