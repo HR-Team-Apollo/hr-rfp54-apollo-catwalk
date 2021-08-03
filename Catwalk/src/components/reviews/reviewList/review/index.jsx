@@ -33,6 +33,7 @@ const Review = ({review, openModal}) => (
           review.photos.map(photoData=>{
             return(<img
               key={photoData.id}
+              className='clickMe'
               style={{
                 height: '5rem'
               }}

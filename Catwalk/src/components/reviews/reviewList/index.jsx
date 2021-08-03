@@ -31,7 +31,7 @@ const ReviewList = ({reviews, starFilter, recommended, sortHandler, moreReviewsH
           <button
             className='clickMe'
             style={{fontFamily: 'inherit'}}
-            onClick={()=>value.openModal(<ReviewForm id={reviews.product}/>)}>Add A Review +</button>
+            onClick={()=>value.openModal(<ReviewForm id={value.id}/>)}>Add A Review +</button>
         </div>
       </div>
     )}
