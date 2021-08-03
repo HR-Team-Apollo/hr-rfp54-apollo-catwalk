@@ -12,7 +12,11 @@ const YourOutfitList = ({id, handleProductChange}) => {
   useEffect(() => {
     axios.get('http://localhost:3001/api/read')
       .then(res => {
-        setOutfitProducts(res.data.products);
+        if (res.data) {
+          setOutfitProducts(res.data.products);
+        } else {
+          setOutfitProducts([]);
+        }
       });
   }, []);
 

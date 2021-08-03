@@ -20,7 +20,7 @@ class ProductList extends React.Component {
     super(props);
     this.state = {
       relatedProducts: [],
-      arrLeftVisible: true,
+      arrLeftVisible: false,
       arrRightVisible: true
     };
   }
