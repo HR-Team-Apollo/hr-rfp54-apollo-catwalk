@@ -19,7 +19,9 @@ class ProductList extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      relatedProducts: []
+      relatedProducts: [],
+      arrLeftVisible: true,
+      arrRightVisible: true
     };
   }
 
@@ -51,17 +53,19 @@ class ProductList extends React.Component {
     }
   }
 
-  componentDidMount() {
-    // document.getElementById('productArrLeft').style.display = 'none';
-    // document.getElementById('productArrRight').style.display = 'none';
-  }
-
   render() {
     return (
       <div style={{position: 'relative', borderBottom: '1px solid black', paddingBottom: '2.6em'}}>
         <div id = 'productArrLeft' onClick = {() => {
-
-        }}  style={{fontSize: '4.5em', position: 'absolute', top: '0.85em', left: '0', zIndex: '10', cursor: 'pointer'}}>
+          let slider = document.getElementById('productListSlider');
+          slider.scrollLeft -= slider.scrollWidth / 7.3;
+          if (slider.scrollLeft <= 0) {
+            this.setState({arrLeftVisible: false});
+          }
+          if (slider.scrollLeft <= (slider.scrollWidth - slider.clientWidth) - 10) {
+            this.setState({arrRightVisible: true});
+          }
+        }}  style={{display: this.state.arrLeftVisible ? 'inline-block' : 'none', fontSize: '4.5em', position: 'absolute', top: '0.85em', left: '-1em', zIndex: '10', cursor: 'pointer'}}>
           <AiFillCaretLeft />
         </div>
         <div id = 'productListSlider' style = {{display: 'flex', justifyContent: 'flex-start', width: '90%', overflow: 'hidden', paddingLeft: '3em'}}>
@@ -72,8 +76,15 @@ class ProductList extends React.Component {
           }
         </div>
         <div id = 'productArrRight' onClick = {() => {
-
-        }} style={{fontSize: '4.5em', position: 'absolute', top: '0.85em', right: '2.7%', zIndex: '10', cursor: 'pointer'}}>
+          let slider = document.getElementById('productListSlider');
+          slider.scrollLeft += slider.scrollWidth / 7.3;
+          if (slider.scrollLeft >= (slider.scrollWidth - slider.clientWidth) - 10) {
+            this.setState({arrRightVisible: false});
+          }
+          if (slider.scrollLeft >= 0) {
+            this.setState({arrLeftVisible: true});
+          }
+        }} style={{display: this.state.arrRightVisible ? 'inline-block' : 'none', fontSize: '4.5em', position: 'absolute', top: '0.85em', right: '-0.83em', zIndex: '10', cursor: 'pointer'}}>
           <AiFillCaretRight />
         </div>
       </div>

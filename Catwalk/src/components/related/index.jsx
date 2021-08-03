@@ -6,7 +6,7 @@ import AppContext from '../../appContext.js';
 
 const Related = ({handleProductChange}) => {
   return (
-    <div style = {{display: 'flex', flexFlow: 'column nowrap', margin: '0 13% 0 13%'}}>
+    <div style = {{display: 'flex', flexFlow: 'column nowrap', margin: '0 18% 0 18%'}}>
       <AppContext.Consumer>
         {
           ({product}) => (
