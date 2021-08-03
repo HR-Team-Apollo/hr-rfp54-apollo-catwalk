@@ -19,8 +19,7 @@ class ProductList extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      relatedProducts: [],
-      slice: 4
+      relatedProducts: []
     };
   }
 
@@ -61,13 +60,11 @@ class ProductList extends React.Component {
     return (
       <div style={{position: 'relative', borderBottom: '1px solid black', paddingBottom: '2.6em'}}>
         <div id = 'productArrLeft' onClick = {() => {
-          if (!(this.state.slice <= 4)) {
-            this.setState({slice: this.state.slice - 1});
-          }
-        }}  style={{fontSize: '6em', position: 'absolute', top: '0.85em', left: '0', zIndex: '10', cursor: 'pointer'}}>
+
+        }}  style={{fontSize: '4.5em', position: 'absolute', top: '0.85em', left: '0', zIndex: '10', cursor: 'pointer'}}>
           <AiFillCaretLeft />
         </div>
-        <div id = 'productListSlider' style = {{display: 'flex', justifyContent: 'center', width: '90%', overflow: 'hidden', paddingLeft: '3em'}}>
+        <div id = 'productListSlider' style = {{display: 'flex', justifyContent: 'flex-start', width: '90%', overflow: 'hidden', paddingLeft: '3em'}}>
           {
             this.state.relatedProducts.slice(this.state.slice - 4, this.state.slice).map((prodId) => {
               return <ProductCard removeOutfit = {null} handleProductChange = {this.props.handleProductChange} key = {prodId} isStar = {true} id = {prodId} />;
@@ -75,10 +72,8 @@ class ProductList extends React.Component {
           }
         </div>
         <div id = 'productArrRight' onClick = {() => {
-          if (!(this.state.slice >= this.state.relatedProducts.length - 1)) {
-            this.setState({slice: this.state.slice + 1});
-          }
-        }} style={{fontSize: '6em', position: 'absolute', top: '0.85em', right: '2.7%', zIndex: '10', cursor: 'pointer'}}>
+
+        }} style={{fontSize: '4.5em', position: 'absolute', top: '0.85em', right: '2.7%', zIndex: '10', cursor: 'pointer'}}>
           <AiFillCaretRight />
         </div>
       </div>
