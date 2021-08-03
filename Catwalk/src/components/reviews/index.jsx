@@ -10,7 +10,6 @@ class Reviews extends React.Component {
     super(props);
     this.state = {
       reviews: null,
-      meta: null,
       sort: 'relevant',
       page: 1,
       count: 2,
@@ -63,17 +62,23 @@ class Reviews extends React.Component {
     this.getReviews((res)=>{
       this.setState({reviews: res});
     });
-    //TODO: refactor code to pull from app state instead of this redundant server call
-    fetch(`http://localhost:3001/api/reviews/meta/${this.props.id}`, {
-      method: 'GET'
-    })
-      .then(response => response.json())
-      .then(result => {
-        this.setState({meta: result});
+  }
+
+  componentDidUpdate(prevProps) {
+    if(this.props.id !== prevProps.id) {
+      this.setState({
+        reviews: null,
+        sort: 'relevant',
+        page: 1,
+        count: 2,
+        starFilter: [1, 2, 3, 4, 5]
+
+      },
+      this.getReviews((res)=>{
+        this.setState({reviews: res});
       })
-      .catch(error => {
-        console.error('Error:', error);
-      });
+      );
+    }
   }
 
   filterByStars(star) {
@@ -91,20 +96,22 @@ class Reviews extends React.Component {
   render(){
     return (
       <AppContext.Consumer>
-        {()=>(
+        {(context)=>(
           <div className="reviews container">
             <h2>Ratings &amp; Reviews</h2>
             <div style={{display: 'flex'}}>
-              {this.state.meta? <Ratings filter={this.filterByStars.bind(this)} ratings={this.state.meta}/>: null}
-              {this.state.reviews && this.state.meta?
-                <ReviewList
-                  starFilter={this.state.starFilter}
-                  sortHandler={this.sortReviewsHandler.bind(this)}
-                  moreReviewsHandler={this.moreReviewsHandler.bind(this)}
-                  reviews={this.state.reviews}
-                  recommended={this.state.meta.recommended}
-                />:
-                null}
+              <Ratings filter={this.filterByStars.bind(this)}/>
+              {
+                this.state.reviews?
+                  <ReviewList
+                    starFilter={this.state.starFilter}
+                    sortHandler={this.sortReviewsHandler.bind(this)}
+                    moreReviewsHandler={this.moreReviewsHandler.bind(this)}
+                    reviews={this.state.reviews}
+                    recommended={context.product.recommended}
+                  />:
+                  null
+              }
             </div>
           </div>
         )}

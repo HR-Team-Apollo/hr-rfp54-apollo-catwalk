@@ -112,9 +112,9 @@ class App extends React.Component {
               }}
               onClick={()=>{this.setState({darkMode: !this.state.darkMode})}}
             >Change Theme</button>
-            <Overview />
+            {/* <Overview /> */}
             <Related handleProductChange = {this.handleProductChange.bind(this)}/>
-            <QuestionsAndAnswers />
+            {/* <QuestionsAndAnswers /> */}
             {
               this.state.product?
                 <Reviews id={this.state.product.id}/>: null
