@@ -7,18 +7,47 @@ import { AiFillCaretLeft, AiFillCaretRight } from 'react-icons/ai';
 const YourOutfitList = ({id, handleProductChange}) => {
   let [outfitProducts, setOutfitProducts] = useState([]);
   let [arrLeftVisible, setArrLeftVisible] = useState(false);
-  let [arrRightVisible, setArrRightVisible] = useState(true);
+  let [arrRightVisible, setArrRightVisible] = useState(false);
 
   useEffect(() => {
     axios.get('http://localhost:3001/api/read')
       .then(res => {
-        setOutfitProducts(res.data.products);
+        if (res.data) {
+          setOutfitProducts(res.data.products);
+          checkForArrow();
+        } else {
+          setOutfitProducts([]);
+          checkForArrow();
+        }
       });
   }, []);
 
+  const checkForArrow = () => {
+    let slider = document.getElementById('yourOutfitSlider');
+    setTimeout(() => {
+      if (slider) {
+        if (slider.scrollLeft <= 0) {
+          setArrLeftVisible(false);
+        } else {
+          setArrLeftVisible(true);
+        }
+        if (slider.scrollLeft >= (slider.scrollWidth - slider.clientWidth) - 10) {
+          setArrRightVisible(false);
+        } else {
+          setArrRightVisible(true);
+        }
+      }
+      checkForArrow();
+    }, 700);
+  };
+
   // useEffect(() => {
-  //   document.getElementById('outfitArrLeft').style.display = 'none';
-  // }, []);
+  //   let slider = document.getElementById('yourOutfitSlider');
+  //   console.log('this is running');
+  //   if (slider.scrollLeft <= 0) {
+  //     setArrLeftVisible(false);
+  //   }
+  // });
 
   const addProductToOutfit = (id) => {
     let newProducts = outfitProducts.slice();
@@ -45,15 +74,7 @@ const YourOutfitList = ({id, handleProductChange}) => {
     let newProducts = outfitProducts.slice();
     newProducts.splice(newProducts.indexOf(id), 1);
     axios.post('http://localhost:3001/api/write', {products: newProducts})
-      .then(() => {
-        // axios.get('http://localhost:3001/api/read')
-        //   .then(res => {
-        //     setOutfitProducts(res.data.products);
-        //   })
-        //   .catch(err => {
-        //     console.log('failed to retrieve data', err);
-        //   });
-      })
+      .then(() => {})
       .catch(err => {
         console.log('failed to post data', err);
       });

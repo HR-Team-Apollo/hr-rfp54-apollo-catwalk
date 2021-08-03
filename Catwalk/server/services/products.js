@@ -93,7 +93,7 @@ module.exports = {
   readRelatedProducts: (req, res) => {
     fs.readFile(path.resolve(__dirname, '..', 'relatedProducts.txt'), 'utf-8', (err, products) => {
       if (err) {
-        res.send(err);
+        res.send(null);
       } else {
         let results = products.split(',');
         if (results.length === 1 && results[0] === '[]') {

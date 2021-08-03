@@ -3,26 +3,33 @@ import ProductCard from './ProductCard.jsx';
 import axios from 'axios';
 import { AiFillCaretLeft, AiFillCaretRight } from 'react-icons/ai';
 
-// const ProductList = () => {
-//   let [relatedProducts, setRelatedProducts] = useState([]);
-
-//   useEffect(() => {
-
-//   });
-
-//   return (
-
-//   );
-// };
-
 class ProductList extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       relatedProducts: [],
-      arrLeftVisible: true,
-      arrRightVisible: true
+      arrLeftVisible: false,
+      arrRightVisible: false
     };
+  }
+
+  checkForArrow() {
+    let slider = document.getElementById('productListSlider');
+    setTimeout(() => {
+      if (slider) {
+        if (slider.scrollLeft <= 0) {
+          this.setState({arrLeftVisible: false});
+        } else {
+          this.setState({arrLeftVisible: true});
+        }
+        if (slider.scrollLeft >= (slider.scrollWidth - slider.clientWidth) - 10) {
+          this.setState({arrRightVisible: false});
+        } else {
+          this.setState({arrRightVisible: true});
+        }
+      }
+      this.checkForArrow();
+    }, 700);
   }
 
   removeDuplicates(array) {
@@ -37,6 +44,10 @@ class ProductList extends React.Component {
       if (isUnique) { results.push(array[i]); }
     }
     return results;
+  }
+
+  componentDidMount() {
+    this.checkForArrow();
   }
 
   componentDidUpdate(prevProps) {
