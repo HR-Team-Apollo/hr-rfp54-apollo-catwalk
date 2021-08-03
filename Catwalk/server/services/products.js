@@ -82,7 +82,7 @@ module.exports = {
       });
   },
   writeRelatedProducts: (req, res) => {
-    fs.writeFile(path.resolve(__dirname, '..', 'outfitStorage', 'relatedProducts.txt'), req.body.products.toString(), (err) => {
+    fs.writeFile(path.resolve(__dirname, '..', 'relatedProducts.txt'), req.body.products.toString(), (err) => {
       if (err) {
         res.send(err);
       } else {
@@ -91,7 +91,7 @@ module.exports = {
     });
   },
   readRelatedProducts: (req, res) => {
-    fs.readFile(path.resolve(__dirname, '..', 'outfitStorage', 'relatedProducts.txt'), 'utf-8', (err, products) => {
+    fs.readFile(path.resolve(__dirname, '..', 'relatedProducts.txt'), 'utf-8', (err, products) => {
       if (err) {
         res.send(null);
       } else {
