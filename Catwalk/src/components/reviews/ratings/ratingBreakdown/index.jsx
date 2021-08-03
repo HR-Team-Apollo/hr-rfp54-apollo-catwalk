@@ -38,6 +38,21 @@ class RatingBreakdown extends React.Component {
     this.setState({avgRatings:avg});
   }
 
+  componentDidUpdate(prevProps){
+    console.log('component did update');
+    if(this.props.ratings !== prevProps.ratings) {
+      this.setState({
+        totalRatings: this.calcTotal(this.props.ratings),
+        totalRecommends: this.calcTotal(this.props.recommendations)},
+      ()=>{
+
+        const avg = this.calcAvgRatings(this.props.ratings);
+        this.setState({avgRatings:avg});
+      }
+      );
+    }
+  }
+
   render() {
     return(
       <div className="rating-breakdown">
@@ -48,7 +63,7 @@ class RatingBreakdown extends React.Component {
           <Stars rating={this.state.avgRatings}/>
         </div>
 
-        <div style={{fontSize:'.5rem'}}>
+        <div style={{fontSize:'.75rem'}}>
           <span className='recommendations'>
             {this.calcPercentage(this.props.recommendations['true'], Number(this.state.totalRecommends))}
           </span>
