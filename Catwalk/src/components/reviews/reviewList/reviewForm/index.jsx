@@ -27,18 +27,20 @@ class ReviewForm extends React.Component {
     };
   }
 
-  updateFormState(key,value){
-    if (typeof value === 'object') {
+  updateFormState(key,value, index){
+    if (key === 'photo'){
+      let photosArray = this.state.photos;
+      photosArray[index] = value;
+      console.log(key, value, index);
+      console.log(this.state.photos);
+      this.setState({photos: photosArray});
+    } else if (typeof value === 'object') {
       let newState = this.state[key];
       let valKeys = Object.keys(value);
       valKeys.forEach(k=>{
         newState[k] = value[k];
       });
       this.setState({characteristics: newState});
-    } else if (key === 'photos'){
-      let currPhotos = this.state.photos;
-      currPhotos.concat(value);
-      this.setState({photos: currPhotos});
     } else {
       this.setState({[key]: value});
     }
