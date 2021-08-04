@@ -9,12 +9,12 @@ const Related = ({handleProductChange}) => {
     <div style = {{display: 'flex', flexFlow: 'column nowrap', margin: '0 18% 0 18%'}}>
       <AppContext.Consumer>
         {
-          ({product}) => (
+          (context) => (
             <Suspense fallback={<div>Loading...</div>}>
               <h2 style = {{marginLeft: '5%', fontSize: '1.7em'}}>Related Products</h2>
-              <ProductList handleProductChange = {handleProductChange} id = {product ? product.product_id : null}/>
+              <ProductList handleProductChange = {handleProductChange} id = {context.product ? context.product.product_id : null}/>
               <h2 style = {{marginLeft: '5%', fontSize: '1.7em'}}>Your Outfit</h2>
-              <YourOutfitList handleProductChange = {handleProductChange} id = {product ? product.product_id : null}/>
+              <YourOutfitList handleProductChange = {handleProductChange} id = {context.product ? context.product.product_id : null}/>
             </Suspense>
           )
         }
