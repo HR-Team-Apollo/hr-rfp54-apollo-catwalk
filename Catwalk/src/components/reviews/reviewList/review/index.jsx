@@ -6,7 +6,7 @@ import ReviewBody from './reviewBody';
 const Review = ({review, openModal}) => (
   <div className='review' style={{
     display: 'block',
-    maxWidth: '35rem',
+    width: '35rem',
     borderBottom: '1px solid grey'}}>
     <div className='review-header' style={{display: 'flex', justifyContent: 'space-between'}}>
       <Stars rating={review.rating}/>
