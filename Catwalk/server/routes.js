@@ -34,5 +34,7 @@ router.post('/write', products.writeRelatedProducts);
 
 router.get('/read', products.readRelatedProducts);
 
+router.post('/interaction', products.logInteraction);
+
 
 module.exports = router;

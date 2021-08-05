@@ -72,7 +72,10 @@ const ProductCard = ({id, isStar, handleProductChange, removeOutfit}) => {
     );
   } else {
     return (
-      <h4>Loading...</h4>
+      <div style = {{border: '1.5px solid black', flexBasis: '10.5em', minWidth: '10.5em', margin: '0 1.4%', position: 'relative'}}>
+        <div style = {{height: '10em', backgroundColor: 'rgb(235, 235, 235)'}}></div>
+        <div style = {{height: '6em'}}></div>
+      </div>
     );
   }
 };

@@ -47,6 +47,15 @@ class ProductList extends React.Component {
   }
 
   componentDidMount() {
+    axios.get(`http://localhost:3001/api/products/${this.props.id ? this.props.id : '17070'}/related`)
+      .then(res => {
+        this.setState({
+          relatedProducts: this.removeDuplicates(res.data)
+        });
+      })
+      .catch(err => {
+        console.log('failed to fetch data', err);
+      });
     this.checkForArrow();
   }
 
