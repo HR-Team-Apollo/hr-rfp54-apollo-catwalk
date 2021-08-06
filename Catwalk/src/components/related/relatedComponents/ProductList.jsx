@@ -90,9 +90,14 @@ class ProductList extends React.Component {
         </div>
         <div id = 'productListSlider' style = {{scrollBehavior: 'smooth', display: 'flex', justifyContent: 'flex-start', width: '90%', overflow: 'hidden', paddingLeft: '3em'}}>
           {
-            this.state.relatedProducts.slice(this.state.slice - 4, this.state.slice).map((prodId) => {
+            this.props.loading ? <div>loading...</div> : this.state.relatedProducts.slice(this.state.slice - 4, this.state.slice).map((prodId) => {
               return <ProductCard removeOutfit = {null} handleProductChange = {this.props.handleProductChange} key = {prodId} isStar = {true} id = {prodId} />;
             })
+          }
+          {
+            // this.state.relatedProducts.slice(this.state.slice - 4, this.state.slice).map((prodId) => {
+            //   return <ProductCard removeOutfit = {null} handleProductChange = {this.props.handleProductChange} key = {prodId} isStar = {true} id = {prodId} />;
+            // })
           }
         </div>
         <div id = 'productArrRight' onClick = {() => {

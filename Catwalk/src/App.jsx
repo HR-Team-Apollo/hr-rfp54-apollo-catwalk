@@ -42,7 +42,8 @@ class App extends React.Component {
         Quality: [ 'Poor', 'Below average', 'What I expected', 'Pretty great', 'Perfect'],
         Length: [ 'Runs Short', 'Runs slightly short', 'Perfect', 'Runs slightly long', 'Runs long'],
         Fit: [ 'Runs tight', 'Runs slightly tight', 'Perfect', 'Runs slightly long', 'Runs long']
-      }
+      },
+      loading: false
     };
   }
 
@@ -101,10 +102,12 @@ class App extends React.Component {
     if (id === 17076) {
       alert('You\'ve found an easter egg!');
     } else {
+      this.setState({loading: true});
       axios.get(`http://localhost:3001/api/reviews/chars?product_id=${id}`)
         .then(res => {
           this.setState({
-            product: res.data
+            product: res.data,
+            loading: false
           });
         })
         .catch(err => {
@@ -136,7 +139,7 @@ class App extends React.Component {
             {/* <Overview /> */}
             {
               this.state.product ?
-                <Related handleProductChange = {this.handleProductChange.bind(this)}/> : <Loader />
+                <Related loading = {this.state.loading} handleProductChange = {this.handleProductChange.bind(this)}/> : <Loader />
             }
             {/* <QuestionsAndAnswers /> */}
             {/* <div style = {{margin: '0 40%', fontSize: '3.5em'}}>Loading Please Wait...</div> */}
