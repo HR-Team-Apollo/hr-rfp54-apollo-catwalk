@@ -83,9 +83,9 @@ const LoaderContainer = styles.div`
 
 const Loader = () => {
   return (
-    <LoaderContainer>
+    <div style = {{margin: '0 45%'}}>
       <div className="lds-spinner"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>
-    </LoaderContainer>
+    </div>
   );
 };
 

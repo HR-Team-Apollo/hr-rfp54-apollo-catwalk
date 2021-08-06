@@ -5,7 +5,7 @@ import AppContext from '../../appContext.js';
 
 const Related = ({handleProductChange, logInteraction, loading}) => {
   return (
-    <div id='related' className = 'container widget' style = {{display: 'flex', flexFlow: 'column nowrap'}}>
+    <div id='related' className = 'container widget'>
       <AppContext.Consumer>
         {
           (context) => (

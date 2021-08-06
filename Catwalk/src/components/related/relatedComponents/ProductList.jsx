@@ -2,6 +2,7 @@ import React from 'react';
 import ProductCard from './ProductCard.jsx';
 import axios from 'axios';
 import { AiFillCaretLeft, AiFillCaretRight } from 'react-icons/ai';
+import Loader from '../../../utils/loader';
 
 class ProductList extends React.Component {
   constructor(props) {
@@ -90,7 +91,7 @@ class ProductList extends React.Component {
         </div>
         <div id = 'productListSlider' style = {{scrollBehavior: 'smooth', display: 'flex', justifyContent: 'flex-start', width: '90%', overflow: 'hidden', paddingLeft: '3em'}}>
           {
-            this.props.loading ? <div>loading...</div> : this.state.relatedProducts.slice(this.state.slice - 4, this.state.slice).map((prodId) => {
+            this.props.loading ? <Loader /> : this.state.relatedProducts.slice(this.state.slice - 4, this.state.slice).map((prodId) => {
               return <ProductCard removeOutfit = {null} handleProductChange = {this.props.handleProductChange} key = {prodId} isStar = {true} id = {prodId} />;
             })
           }

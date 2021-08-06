@@ -3,6 +3,9 @@ const app = express();
 const port = 3001;
 const router = require('./server/routes.js');
 const bodyParser = require('body-parser');
+const compression = require('compression');
+
+app.use(compression());
 
 app.use(bodyParser.json());
 

@@ -141,8 +141,8 @@ class App extends React.Component {
               this.state.product ?
                 <Related loading = {this.state.loading} handleProductChange = {this.handleProductChange.bind(this)}/> : <Loader />
             }
-            {/* <QuestionsAndAnswers /> */}
             {/* <div style = {{margin: '0 40%', fontSize: '3.5em'}}>Loading Please Wait...</div> */}
+            {/* <QuestionsAndAnswers /> */}
             {
               this.state.product?
                 <Reviews id={this.state.product.id}/>: null
