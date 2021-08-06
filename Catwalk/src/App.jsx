@@ -7,6 +7,7 @@ import Modal from './utils/modal';
 import AppContext from './appContext.js';
 import axios from 'axios';
 import styled, {ThemeProvider} from 'styled-components';
+import Loader from './utils/loader';
 
 const lightTheme = {
   background: 'white',
@@ -135,9 +136,10 @@ class App extends React.Component {
             {/* <Overview /> */}
             {
               this.state.product ?
-                <Related handleProductChange = {this.handleProductChange.bind(this)}/> : <div style = {{margin: '0 40%', fontSize: '3.5em'}}>Loading Please Wait...</div>
+                <Related handleProductChange = {this.handleProductChange.bind(this)}/> : <Loader />
             }
             {/* <QuestionsAndAnswers /> */}
+            {/* <div style = {{margin: '0 40%', fontSize: '3.5em'}}>Loading Please Wait...</div> */}
             {
               this.state.product?
                 <Reviews id={this.state.product.id}/>: null
