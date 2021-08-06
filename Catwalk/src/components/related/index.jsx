@@ -1,9 +1,8 @@
 import React, {Suspense} from 'react';
-// import ProductList from './relatedComponents/ProductList.jsx';
 import ProductList from './relatedComponents/ProductList.jsx';
 import YourOutfitList from './relatedComponents/YourOutfitList.jsx';
 import AppContext from '../../appContext.js';
-// context.product ? context.product.product_id : null
+
 const Related = ({handleProductChange, logInteraction}) => {
   return (
     <div id='related' className = 'container widget' style = {{display: 'flex', flexFlow: 'column nowrap'}}>
