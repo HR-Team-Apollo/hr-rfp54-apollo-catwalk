@@ -98,7 +98,7 @@ class Reviews extends React.Component {
       <AppContext.Consumer>
         {(context)=>(
           <div className="reviews container">
-            <h2>Ratings &amp; Reviews</h2>
+            <h2 className = 'header' onClick={(e)=>console.log(e)}>Ratings &amp; Reviews</h2>
             <div style={{display: 'flex'}}>
               <Ratings filter={this.filterByStars.bind(this)}/>
               {

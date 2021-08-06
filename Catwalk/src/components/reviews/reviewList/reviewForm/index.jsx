@@ -64,29 +64,41 @@ class ReviewForm extends React.Component {
 
             <button type="submit" className='clickMe' onClick={
               (e) => {
+                const formEls = document.getElementById('review-form').elements;
+                for(let i = 0; i < formEls.length - 1; i++){
+                  const inputEl = formEls[i];
+                  if(!inputEl.checkValidity()){
+                    console.log(inputEl.validationMessage);//'' :(
+                  }
+                  // if (inputEl.required) {
+                  //   console.log(inputEl, inputEl.checkValidity());
+
+                  // }
+                }
+
                 e.preventDefault();
-                let data = {
-                  'product_id': Number(this.state.product_id),
-                  'rating': this.state.rating,
-                  'summary': this.state.summary,
-                  'body': this.state.body,
-                  'recommend': this.state.recommend,
-                  'photos': this.state.photos,
-                  'email': this.state.email,
-                  'name': this.state.name,
-                  'characteristics': this.state.characteristics
-                };
-                console.log(data);
-                axios.post('http://localhost:3001/api/reviews', data)
-                  .then(res=>{{
-                    console.log(res.data);
-                    if(res.data === 'Created'){
-                      openModal(<p>Thank you for submitting your review</p>);
-                    }else{
-                      alert('something went wrong');
-                    }
-                  }})
-                  .catch(err=>console.log(err));
+              //   let data = {
+              //     'product_id': Number(this.state.product_id),
+              //     'rating': this.state.rating,
+              //     'summary': this.state.summary,
+              //     'body': this.state.body,
+              //     'recommend': this.state.recommend,
+              //     'photos': this.state.photos,
+              //     'email': this.state.email,
+              //     'name': this.state.name,
+              //     'characteristics': this.state.characteristics
+              //   };
+              //   console.log(data);
+              //   axios.post('http://localhost:3001/api/reviews', data)
+              //     .then(res=>{{
+              //       console.log(res.data);
+              //       if(res.data === 'Created'){
+              //         openModal(<p>Thank you for submitting your review</p>);
+              //       }else{
+              //         alert('something went wrong');
+              //       }
+              //     }})
+              //     .catch(err=>console.log(err));
               }}
             >Submit</button>
           </form>
