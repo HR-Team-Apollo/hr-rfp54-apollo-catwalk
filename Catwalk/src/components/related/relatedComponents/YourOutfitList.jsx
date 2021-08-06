@@ -95,7 +95,7 @@ const YourOutfitList = ({id, handleProductChange}) => {
       }}  style={{display: arrLeftVisible ? 'inline-block' : 'none', fontSize: '4.5em', position: 'absolute', top: '0.85em', left: '-1em', zIndex: '10', cursor: 'pointer'}}>
         <AiFillCaretLeft />
       </div>
-      <div id = 'yourOutfitSlider' style = {{display: 'flex', justifyContent: 'flex-start', width: '90%', overflow: 'hidden', paddingLeft: '3em'}}>
+      <div id = 'yourOutfitSlider' style = {{scrollBehavior: 'smooth', display: 'flex', justifyContent: 'flex-start', width: '90%', overflow: 'hidden', paddingLeft: '3em'}}>
         {
           outfitProducts.map((prodId) => {
             return <ProductCard handleProductChange = {handleProductChange} removeOutfit = {removeOutfit} isStar = {false} key = {prodId} id = {prodId}/>;
@@ -118,5 +118,8 @@ const YourOutfitList = ({id, handleProductChange}) => {
     </div>
   );
 };
-
+// curl -sL https://deb.nodesource.com/setup_14.x | sudo -E bash -
+// sudo apt-get install -y nodejs
+// sudo apt-get install git
+// sudo iptables -t nat -A PREROUTING -i eth0 -p tcp --dport 80 -j REDIRECT --to-port 3000
 export default YourOutfitList;

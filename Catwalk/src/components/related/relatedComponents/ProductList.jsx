@@ -47,6 +47,15 @@ class ProductList extends React.Component {
   }
 
   componentDidMount() {
+    axios.get(`http://localhost:3001/api/products/${this.props.id ? this.props.id : '17070'}/related`)
+      .then(res => {
+        this.setState({
+          relatedProducts: this.removeDuplicates(res.data)
+        });
+      })
+      .catch(err => {
+        console.log('failed to fetch data', err);
+      });
     this.checkForArrow();
   }
 
@@ -79,7 +88,7 @@ class ProductList extends React.Component {
         }}  style={{display: this.state.arrLeftVisible ? 'inline-block' : 'none', fontSize: '4.5em', position: 'absolute', top: '0.85em', left: '-1em', zIndex: '10', cursor: 'pointer'}}>
           <AiFillCaretLeft />
         </div>
-        <div id = 'productListSlider' style = {{display: 'flex', justifyContent: 'flex-start', width: '90%', overflow: 'hidden', paddingLeft: '3em'}}>
+        <div id = 'productListSlider' style = {{scrollBehavior: 'smooth', display: 'flex', justifyContent: 'flex-start', width: '90%', overflow: 'hidden', paddingLeft: '3em'}}>
           {
             this.state.relatedProducts.slice(this.state.slice - 4, this.state.slice).map((prodId) => {
               return <ProductCard removeOutfit = {null} handleProductChange = {this.props.handleProductChange} key = {prodId} isStar = {true} id = {prodId} />;

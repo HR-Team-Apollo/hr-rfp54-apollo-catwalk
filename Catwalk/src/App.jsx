@@ -58,6 +58,26 @@ class App extends React.Component {
       });
   }
 
+  logInteraction(e) {
+    let widget = e.target.closest('.widget').id;
+    let element = e.target.localName;
+    e.target.className ? element += ' ' + e.target.className : null;
+    e.target.id ? element += ' ' + e.target.id : null;
+    let data = {
+      element: element,
+      date: new Date().toString(),
+      widget: widget
+    };
+
+    axios.post('http://localhost:3001/api/interaction', data)
+      .then(() => {
+        console.log('posted successfully');
+      })
+      .catch(err => {
+        console.log('failed to post', err);
+      });
+  }
+
   closeModal() {
     this.setState({
       modal:{
@@ -113,7 +133,10 @@ class App extends React.Component {
               onClick={()=>{this.setState({darkMode: !this.state.darkMode})}}
             >Change Theme</button>
             {/* <Overview /> */}
-            <Related handleProductChange = {this.handleProductChange.bind(this)}/>
+            {
+              this.state.product ?
+                <Related handleProductChange = {this.handleProductChange.bind(this)}/> : <div style = {{margin: '0 40%', fontSize: '3.5em'}}>Loading Please Wait...</div>
+            }
             {/* <QuestionsAndAnswers /> */}
             {
               this.state.product?
