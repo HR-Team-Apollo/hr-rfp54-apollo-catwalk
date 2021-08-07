@@ -3,6 +3,8 @@ import ProductInfo from './ProductInfo.jsx';
 import ActionButton from './ActionButton.jsx';
 import axios from 'axios';
 
+const windowPath = window.location.href;
+
 // class ProductCard extends React.Component {
 //   constructor(props) {
 //     super(props);
@@ -48,7 +50,7 @@ const ProductCard = ({id, isStar, handleProductChange, removeOutfit}) => {
   let [card, setCard] = useState(null);
 
   useEffect(() => {
-    axios.get(`http://localhost:3001/api/products/${id}/related/all`)
+    axios.get(`${windowPath}api/products/${id}/related/all`)
       .then(res => {
         setCard(res.data);
       });

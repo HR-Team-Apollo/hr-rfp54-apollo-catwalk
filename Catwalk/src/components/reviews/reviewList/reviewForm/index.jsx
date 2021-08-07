@@ -11,6 +11,8 @@ import PhotosInput from './photosInput';
 import EmailInput from './emailInput';
 import NameInput from './nameInput';
 
+const windowPath = window.location.href;
+
 class ReviewForm extends React.Component {
   constructor(props) {
     super(props);
@@ -77,7 +79,7 @@ class ReviewForm extends React.Component {
                   'characteristics': this.state.characteristics
                 };
                 console.log(data);
-                axios.post('http://localhost:3001/api/reviews', data)
+                axios.post(`${windowPath}api/reviews`, data)
                   .then(res=>{{
                     console.log(res.data);
                     if(res.data === 'Created'){

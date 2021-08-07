@@ -9,6 +9,8 @@ import axios from 'axios';
 import styled, {ThemeProvider} from 'styled-components';
 import Loader from './utils/loader';
 
+const windowPath = window.location.href;
+
 const lightTheme = {
   background: 'white',
   mainFont: '#424141',
@@ -48,7 +50,7 @@ class App extends React.Component {
   }
 
   componentDidMount() {
-    axios.get('http://localhost:3001/api/reviews/chars?product_id=17070')
+    axios.get(`${windowPath}api/reviews/chars?product_id=17070`)
       .then(res => {
         console.log(res);
         this.setState({
@@ -71,7 +73,7 @@ class App extends React.Component {
       widget: widget
     };
 
-    axios.post('http://localhost:3001/api/interaction', data)
+    axios.post(`${windowPath}api/interaction`, data)
       .then(() => {
         console.log('posted successfully');
       })
@@ -103,7 +105,7 @@ class App extends React.Component {
       alert('You\'ve found an easter egg!');
     } else {
       this.setState({loading: true});
-      axios.get(`http://localhost:3001/api/reviews/chars?product_id=${id}`)
+      axios.get(`${windowPath}api/reviews/chars?product_id=${id}`)
         .then(res => {
           this.setState({
             product: res.data,

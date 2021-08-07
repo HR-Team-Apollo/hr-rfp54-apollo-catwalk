@@ -4,13 +4,15 @@ import AddOutfitCard from './AddOutfitCard.jsx';
 import axios from 'axios';
 import { AiFillCaretLeft, AiFillCaretRight } from 'react-icons/ai';
 
+const windowPath = window.location.href;
+
 const YourOutfitList = ({id, handleProductChange}) => {
   let [outfitProducts, setOutfitProducts] = useState([]);
   let [arrLeftVisible, setArrLeftVisible] = useState(false);
   let [arrRightVisible, setArrRightVisible] = useState(false);
 
   useEffect(() => {
-    axios.get('http://localhost:3001/api/read')
+    axios.get(`${windowPath}api/read`)
       .then(res => {
         if (res.data) {
           setOutfitProducts(res.data.products);
@@ -54,9 +56,9 @@ const YourOutfitList = ({id, handleProductChange}) => {
     if (!newProducts.includes(id)) {
       newProducts.push(id);
       let data = {products: newProducts};
-      axios.post('http://localhost:3001/api/write', data)
+      axios.post(`${windowPath}api/write`, data)
         .then(() => {
-          axios.get('http://localhost:3001/api/read')
+          axios.get(`${windowPath}api/read`)
             .then(res => {
               setOutfitProducts(res.data.products);
             })
@@ -73,7 +75,7 @@ const YourOutfitList = ({id, handleProductChange}) => {
   const removeOutfit = (id) => {
     let newProducts = outfitProducts.slice();
     newProducts.splice(newProducts.indexOf(id), 1);
-    axios.post('http://localhost:3001/api/write', {products: newProducts})
+    axios.post(`${windowPath}api/write`, {products: newProducts})
       .then(() => {})
       .catch(err => {
         console.log('failed to post data', err);
