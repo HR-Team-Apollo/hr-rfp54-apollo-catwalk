@@ -4,6 +4,8 @@ import axios from 'axios';
 import { AiFillCaretLeft, AiFillCaretRight } from 'react-icons/ai';
 import Loader from '../../../utils/loader';
 
+const windowPath = window.location.href;
+
 class ProductList extends React.Component {
   constructor(props) {
     super(props);
@@ -48,7 +50,7 @@ class ProductList extends React.Component {
   }
 
   componentDidMount() {
-    axios.get(`http://localhost:3001/api/products/${this.props.id ? this.props.id : '17070'}/related`)
+    axios.get(`${windowPath}api/products/${this.props.id ? this.props.id : '17070'}/related`)
       .then(res => {
         this.setState({
           relatedProducts: this.removeDuplicates(res.data)
@@ -62,7 +64,7 @@ class ProductList extends React.Component {
 
   componentDidUpdate(prevProps) {
     if (this.props.id !== prevProps.id) {
-      axios.get(`http://localhost:3001/api/products/${this.props.id ? this.props.id : '17070'}/related`)
+      axios.get(`${windowPath}api/products/${this.props.id ? this.props.id : '17070'}/related`)
         .then(res => {
           this.setState({
             relatedProducts: this.removeDuplicates(res.data)
