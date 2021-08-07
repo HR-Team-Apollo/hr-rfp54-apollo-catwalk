@@ -7,6 +7,7 @@ import Modal from './utils/modal';
 import AppContext from './appContext.js';
 import axios from 'axios';
 import styled, {ThemeProvider} from 'styled-components';
+import Loader from './utils/loader';
 
 const lightTheme = {
   background: 'white',
@@ -41,7 +42,8 @@ class App extends React.Component {
         Quality: [ 'Poor', 'Below average', 'What I expected', 'Pretty great', 'Perfect'],
         Length: [ 'Runs Short', 'Runs slightly short', 'Perfect', 'Runs slightly long', 'Runs long'],
         Fit: [ 'Runs tight', 'Runs slightly tight', 'Perfect', 'Runs slightly long', 'Runs long']
-      }
+      },
+      loading: false
     };
   }
 
@@ -55,6 +57,26 @@ class App extends React.Component {
       })
       .catch(err => {
         console.log('failed to fetch data', err);
+      });
+  }
+
+  logInteraction(e) {
+    let widget = e.target.closest('.widget').id;
+    let element = e.target.localName;
+    e.target.className ? element += ' ' + e.target.className : null;
+    e.target.id ? element += ' ' + e.target.id : null;
+    let data = {
+      element: element,
+      date: new Date().toString(),
+      widget: widget
+    };
+
+    axios.post('http://localhost:3001/api/interaction', data)
+      .then(() => {
+        console.log('posted successfully');
+      })
+      .catch(err => {
+        console.log('failed to post', err);
       });
   }
 
@@ -80,10 +102,12 @@ class App extends React.Component {
     if (id === 17076) {
       alert('You\'ve found an easter egg!');
     } else {
+      this.setState({loading: true});
       axios.get(`http://localhost:3001/api/reviews/chars?product_id=${id}`)
         .then(res => {
           this.setState({
-            product: res.data
+            product: res.data,
+            loading: false
           });
         })
         .catch(err => {
@@ -113,7 +137,11 @@ class App extends React.Component {
               onClick={()=>{this.setState({darkMode: !this.state.darkMode})}}
             >Change Theme</button>
             {/* <Overview /> */}
-            <Related handleProductChange = {this.handleProductChange.bind(this)}/>
+            {
+              this.state.product ?
+                <Related loading = {this.state.loading} handleProductChange = {this.handleProductChange.bind(this)}/> : <Loader />
+            }
+            {/* <div style = {{margin: '0 40%', fontSize: '3.5em'}}>Loading Please Wait...</div> */}
             {/* <QuestionsAndAnswers /> */}
             {
               this.state.product?

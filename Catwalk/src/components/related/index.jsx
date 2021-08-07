@@ -1,21 +1,20 @@
 import React, {Suspense} from 'react';
-// import ProductList from './relatedComponents/ProductList.jsx';
-const ProductList = React.lazy(() => import('./relatedComponents/ProductList.jsx'));
+import ProductList from './relatedComponents/ProductList.jsx';
 import YourOutfitList from './relatedComponents/YourOutfitList.jsx';
 import AppContext from '../../appContext.js';
 
-const Related = ({handleProductChange}) => {
+const Related = ({handleProductChange, logInteraction, loading}) => {
   return (
-    <div style = {{display: 'flex', flexFlow: 'column nowrap', margin: '0 18% 0 18%'}}>
+    <div id='related' className = 'container widget'>
       <AppContext.Consumer>
         {
-          ({product}) => (
-            <Suspense fallback={<div>Loading...</div>}>
+          (context) => (
+            <section>
               <h2 style = {{marginLeft: '5%', fontSize: '1.7em'}}>Related Products</h2>
-              <ProductList handleProductChange = {handleProductChange} id = {product ? product.product_id : null}/>
+              <ProductList loading={loading} handleProductChange = {handleProductChange} id = {context.product.product_id}/>
               <h2 style = {{marginLeft: '5%', fontSize: '1.7em'}}>Your Outfit</h2>
-              <YourOutfitList handleProductChange = {handleProductChange} id = {product ? product.product_id : null}/>
-            </Suspense>
+              <YourOutfitList handleProductChange = {handleProductChange} id = {context.product ? context.product.product_id : null}/>
+            </section>
           )
         }
       </AppContext.Consumer>

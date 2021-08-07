@@ -107,5 +107,20 @@ module.exports = {
         res.send(JSON.parse(results));
       }
     });
+  },
+  logInteraction: (req, res) => {
+    let params = {
+      element: req.body.element,
+      widget: req.body.widget,
+      time: req.body.date
+    };
+    axios.post(`${apiUrl}/interactions`, params)
+      .then(() => {
+        console.log('this worked');
+        res.send('ok');
+      })
+      .catch(err => {
+        res.send(err);
+      });
   }
 };

@@ -1,12 +1,17 @@
 const express = require('express');
 const app = express();
 const port = 3001;
-const router = require('./routes.js');
+const router = require('./server/routes.js');
 const bodyParser = require('body-parser');
+const compression = require('compression');
+
+app.use(compression());
 
 app.use(bodyParser.json());
 
 app.use(express.json());
+
+app.use(express.static('dist'));
 
 app.use((req, res, next) => {
   res.append('Access-Control-Allow-Origin', ['*']);
