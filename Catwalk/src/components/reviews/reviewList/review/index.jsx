@@ -3,6 +3,8 @@ import Stars from '../../../../utils/stars';
 import moment from 'moment';
 import ReviewBody from './reviewBody';
 
+const windowPath = window.location.href;
+
 const Review = ({review, openModal}) => (
   <div className='review' style={{
     display: 'block',
@@ -59,7 +61,7 @@ const Review = ({review, openModal}) => (
       <span style={{margin: '0 2rem'}}>
         Yes(<span className='clickMe'  data-clicked='false' onClick={(e)=>{
           if(e.target.dataset.clicked==='false'){
-            fetch(`http://localhost:3001/api/reviews/${review.review_id}/helpful`, {
+            fetch(`${windowPath}api/reviews/${review.review_id}/helpful`, {
               method: 'PUT'
             })
               .then(response => response)
@@ -75,7 +77,7 @@ const Review = ({review, openModal}) => (
       </span>
       <span className='clickMe' onClick={(e)=>{
         if(e.target.innerText === 'Report') {
-          fetch(`http://localhost:3001/api/reviews/${review.review_id}/report`, {
+          fetch(`${windowPath}api/reviews/${review.review_id}/report`, {
             method: 'PUT'
           })
             .then(response => response)

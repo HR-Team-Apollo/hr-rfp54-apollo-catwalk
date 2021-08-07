@@ -4,6 +4,7 @@ import AppContext from '../../appContext.js';
 import Ratings from './ratings';
 import ReviewList from './reviewList';
 
+const windowPath = window.location.href;
 
 class Reviews extends React.Component {
   constructor(props){
@@ -32,7 +33,7 @@ class Reviews extends React.Component {
 
   getReviews(next) {
     console.log('[getReviews state]' ,this.state);
-    fetch(`http://localhost:3001/api/reviews/reviewPage/${this.props.id}/${this.state.page}/${this.state.count}/${this.state.sort}`, {
+    fetch(`${windowPath}api/reviews/reviewPage/${this.props.id}/${this.state.page}/${this.state.count}/${this.state.sort}`, {
       method: 'GET'
     })
       .then(response => response.json())
