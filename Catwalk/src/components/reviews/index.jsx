@@ -33,7 +33,7 @@ class Reviews extends React.Component {
 
   getReviews(next) {
     console.log('[getReviews state]' ,this.state);
-    fetch(`${windowPath}reviews/reviewPage/${this.props.id}/${this.state.page}/${this.state.count}/${this.state.sort}`, {
+    fetch(`${windowPath}api/reviews/reviewPage/${this.props.id}/${this.state.page}/${this.state.count}/${this.state.sort}`, {
       method: 'GET'
     })
       .then(response => response.json())
