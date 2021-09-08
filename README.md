@@ -1,13 +1,39 @@
+
 # Welcome to Project Catwalk!
+
+![javascript](https://img.shields.io/badge/JavaScript-323330?style=for-the-badge&logo=javascript&logoColor=F7DF1E)
+![react](https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB)
+![vite.js](https://img.shields.io/badge/Vite-B73BFE?style=for-the-badge&logo=vite&logoColor=FFD62E)
+![node.js](https://img.shields.io/badge/Node.js-339933?style=for-the-badge&logo=nodedotjs&logoColor=white)
+
+## Widgets
+
+### [Related Products](Catwalk/src/related)
+
+![Related Products](related_products_README.png)
+
+- Developed by [Caleb Broderick](https://github.com/liquidarkness564)
+
+The Related Items & Comparison component displays two sets of related products.  The first set is a list of products, determined internally, that are related to the product currently being viewed.  The second set is a list, custom created by the user, of products which the user has grouped with the current product into an ‘outfit’.
+
+### [Ratings and Reviews](Catwalk/src/reviews)
+
+![Ratings and Reviews](ratings_and_reviews_README.png)
+
+- Developed by [Amalia Bryant](https://github.com/cookieByte4130)
+
+- The Ratings & Reviews component allows viewing and submission of reviews for the product selected.  Users are able to write a new review for the product select. Users can see the rating and product break down.
 
 ## Environment Setup:
 * Install all package dependencies.
   ```
+  cd Catwalk
   npm install
   ```
 * Start server via Vite @localhost:3000
   ```
-  npm run dev
+  npm run build
+  npm run start
   ```
 
 ## Contributors:
@@ -15,6 +41,7 @@
 * Katie Kim - Overview
 * Amalia Bryant - Ratings & Reviews
 * Yasin Khan - Q & A
+
 
 ## API Calls:
 
