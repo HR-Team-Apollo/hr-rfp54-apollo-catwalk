@@ -3,7 +3,7 @@ import Stars from '../../../utils/stars';
 
 const ProductInfo = ({card}) => (
   <div style={{backgroundColor: 'white'}}>
-    <h5 style = {{margin: '0.2em'}}>{card.category.toUpperCase()}</h5>
+    <h5 style = {{margin: '0.2em'}}>{card ? card.category.toUpperCase() : 'BROKEN'}</h5>
     <h5 style = {{margin: '0.2em'}}>{card.name}</h5>
     <h5 style = {{margin: '0.2em'}}>${card.original_price}</h5>
     <div style = {{fontSize: '0.8em', margin: '0'}}>

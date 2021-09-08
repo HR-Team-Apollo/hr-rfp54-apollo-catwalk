@@ -50,8 +50,9 @@ class ProductList extends React.Component {
   }
 
   componentDidMount() {
-    axios.get(`${windowPath}api/products/${this.props.id ? this.props.id : '17070'}/related`)
+    axios.get(`${windowPath}api/products/${this.props.id ? this.props.id : '40344'}/related`)
       .then(res => {
+        console.log(res.data);
         this.setState({
           relatedProducts: this.removeDuplicates(res.data)
         });
@@ -64,7 +65,7 @@ class ProductList extends React.Component {
 
   componentDidUpdate(prevProps) {
     if (this.props.id !== prevProps.id) {
-      axios.get(`${windowPath}api/products/${this.props.id ? this.props.id : '17070'}/related`)
+      axios.get(`${windowPath}api/products/${this.props.id ? this.props.id : '40344'}/related`)
         .then(res => {
           this.setState({
             relatedProducts: this.removeDuplicates(res.data)

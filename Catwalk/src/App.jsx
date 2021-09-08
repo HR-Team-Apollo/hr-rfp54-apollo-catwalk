@@ -50,7 +50,7 @@ class App extends React.Component {
   }
 
   componentDidMount() {
-    axios.get(`${windowPath}api/reviews/chars?product_id=17070`)
+    axios.get(`${windowPath}api/reviews/chars?product_id=40344`)
       .then(res => {
         console.log(res);
         this.setState({
