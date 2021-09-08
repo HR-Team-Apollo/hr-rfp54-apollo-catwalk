@@ -10,7 +10,7 @@
 
 ### [Related Products](Catwalk/src/related)
 
-![Related Products](related_products_README.png)
+![Related Products](images/related_products_README.png)
 
 - Developed by [Caleb Broderick](https://github.com/liquidarkness564)
 
@@ -18,7 +18,7 @@ The Related Items & Comparison component displays two sets of related products. 
 
 ### [Ratings and Reviews](Catwalk/src/reviews)
 
-![Ratings and Reviews](ratings_and_reviews_README.png)
+![Ratings and Reviews](images/ratings_and_reviews_README.png)
 
 - Developed by [Amalia Bryant](https://github.com/cookieByte4130)
 
@@ -45,7 +45,7 @@ The Related Items & Comparison component displays two sets of related products. 
 
 ## API Calls:
 
-* NOTE: All api calls with start with the local server api: 'http://localhost:3001/api'
+* NOTE: All api calls will start with the local server api: 'http://localhost:3001/api'
 
 * NOTE: Some GET requests have options to include parameters in them. When Incorporating parameters, follow in a style of using a '?' followed by the name of the parameter, and equals sign, and the value
 * Ex: To get 8 products doing a call to '/products', do '/products?count=8'
